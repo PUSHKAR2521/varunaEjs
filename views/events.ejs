@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <link rel="stylesheet" href="/css/events.css">
+    <link rel="stylesheet" href="/css/utility.css">
+
+    <script>
+        $(document).ready(function () {
+            $("#bt1").click(function () {
+                $(".sec1").show();
+                $(".sec2").hide();
+                $(".sec3").hide();
+            });
+            $("#bt2").click(function () {
+                $(".sec2").show();
+                $(".sec1").hide();
+                $(".sec3").hide();
+            });
+            $("#bt3").click(function () {
+                $(".sec3").show();
+                $(".sec1").hide();
+                $(".sec2").hide();
+            });
+
+
+            $("#hamburger").click(function () {
+                $("#hamburger-slide").show();
+                $("#hamburger-slide").css({ "height": "150vh", "width": "100vw", "left": "0px", "background-color": "white", "position": "absolute", "top": "-70px", "z-index": "10" });
+            });
+
+            $("#cross-icon").click(function () {
+                // $("#hamburger").hide();
+                $("#hamburger-slide").slideUp();
+                // $("#hamburger-slide").css({ "display": "none" });
+                // $("#hamburger").show();
+            });
+
+
+
+        });
+    </script>
+
+
+</head>
+
+<body>
+    
+
+    <!-- header code is on views/includes/header.ejs file -->
+    <%- include('includes/header')%>
+        <!-- header code is between this comments -->
+
+
+
+
+    <!-- main code starts from here -->
+
+    <main style="background-color: rgba(211, 211, 211, 0.276); height: auto;">
+
+        <div
+            style="background-image: url(https://www.itcdiaeurope.com/wp-content/uploads/2021/08/Made_of_Genes_Header_417.jpg); height: 300px; width: 100vw; background-size: contain; color: white; text-align: center; padding-top: 20px;">
+            <h3 style="filter: none; color: red; text-align: center; padding-top: 100px;">Events</h3>
+            <div style="padding-top: 20px;">
+                <a href="/"
+                    style="color: red; text-decoration: none; text-align: center; font-size: 17px;">Home</a> &nbsp; |
+                &nbsp; <a href="/media"
+                    style="color: red; text-decoration: none; text-align: center; font-size: 17px;">Media</a>
+                &nbsp; | &nbsp; <a href="/events"
+                    style="color: red ; text-decoration: none; text-align: center; font-size: 17px;">Events</a>
+            </div>
+        </div>
+
+
+        <div style="display: flex; align-items: center; justify-content: center;gap: 50px; margin-top: 50px; ">
+            <!--this div is for button like 1 2 3 -->
+            <button id="bt1" class="btnn"
+                style="width: 60px; height: 40px; background-color: white;color: red; border-radius: 5px; border: 1px solid grey;">1</button>
+            <button id="bt2" class="btnn"
+                style="width: 60px; height: 40px; background-color: white;color: red; border-radius: 5px; border: 1px solid grey;">2</button>
+            <button id="bt3" class="btnn"
+                style="width: 60px; height: 40px; background-color: white;color: red; border-radius: 5px; border: 1px solid grey;">3</button>
+        </div> <!-- button div ended -->
+
+
+
+        <div>
+            <h4 style="text-align: center; margin-top: 30px; color: red;" class="sec1">You are on 1st part</h4>
+            <h4 style="text-align: center; margin-top: 30px; color: red; display: none;" class="sec2">You are on 2nd
+                part</h4>
+            <h4 style="text-align: center; margin-top: 30px; color: red; display: none;" class="sec3">You are on 3rd
+                part</h4>
+        </div>
+
+
+        <div> <!--this is a main div for images-->
+
+            <div class="grid-container sec1">
+                <div class="grid-item sec1">
+                    <img src="/images/world environemt-img.webp" alt="Image 1" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">World Environment day</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/anual-img.jpg" alt="Image 2" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Annual Dealer Conference</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/15th img.jpg" alt="Image 3" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">15th Aug 2021</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/50th img.jpg" alt="Image 4" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">50th National Saftey Week</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/builder-met.jpg" alt="Image 5" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Builder Meet</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/aop-2019.jpg" alt="Image 6" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">AOP - 2019</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/yoga 2019.jpg" alt="Image 7" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Yoga Day</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/blood donate.jpg" alt="Image 8" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Blood Donate Day</div>
+                </div>
+                <div class="grid-item sec1">
+                    <img src="/images/dealer factory.jpg" alt="Image 9" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Dealer Factory Visit</div>
+                </div>
+            </div>
+
+
+
+
+            <div class="grid-container sec2" style="display: none; ">
+                <div class="grid-item sec2">
+                    <img src="/images/world water 2019.jpg" alt="Image 1" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">World Water Day 2019</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/holi 2019.jpg" alt="Image 2" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Holi - 2019</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/dealer visit 2019.jpg" alt="Image 3" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Dealer Visit - 2019</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/mechanic train.jpg" alt="Image 4" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Mechanic Training</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/service team.jpg" alt="Image 5" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Service Team Training - 2019</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/dealer conference.jpg" alt="Image 6" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Dealer Conference</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/spot award 2019.jpg" alt="Image 7" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Spot Award - 2018</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/medical room.jpg" alt="Image 8" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Medical Room Inauguration</div>
+                </div>
+                <div class="grid-item sec2">
+                    <img src="/images/mechanic factory visit.jpg" alt="Image 9" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Mechanic Factory Visit</div>
+                </div>
+            </div>
+
+
+
+            <div class="grid-container sec3" style="display: none; ">
+                <div class="grid-item sec3">
+                    <img src="/images/celebration.jpg" alt="Image 1" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Celebration Of Achievment</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/saraswati.jpg" alt="Image 2" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Saraswati Vandana</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/christmas.jpg" alt="Image 3" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Chirstmas Celebration</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/goa.jpg" alt="Image 4" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Goa Dealer Meet</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/sub dealer.jpg" alt="Image 5" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Sub Dealer Meet</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/gurkul.jpg" alt="Image 6" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Gurukul Inauguration</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/saftey weak.jpg" alt="Image 7" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Saftey Week</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/energy.jpg" alt="Image 8" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Energy Coversation Week Celebration</div>
+                </div>
+                <div class="grid-item sec3">
+                    <img src="/images/cricket.jpg" alt="Image 9" class="grid-image" style="height: 250px;">
+                    <div class="grid-caption">Cricket Match</div>
+                </div>
+            </div>
+
+
+
+        </div> <!--main div ended and this div is only for images -->
+
+
+    </main>
+
+
+
+    <!-- footer code is on views/includes/footer.ejs file -->
+    <%- include('includes/footer')%>
+        <!-- footer code is between this comments -->
+
+
+
+
+
+
+    <div id="back-top">
+        <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+    </div>
+
+
+</body>
+
+</html>

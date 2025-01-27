@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>suggestion</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="/css/suggestion.css">
+    <link rel="stylesheet" href="/css/utility.css">
+    <link rel="stylesheet" href="/css/suggestionCalc.css">
+
+
+    <script>
+        $(document).ready(function () {
+            $("#hamburger").click(function () {
+                $("#hamburger-slide").show();
+                $("#hamburger-slide").css({ "height": "150vh", "width": "100vw", "left": "0px", "background-color": "white", "position": "absolute", "top": "-70px", "z-index": "10" });
+            });
+
+            $("#cross-icon").click(function () {
+                // $("#hamburger").hide();
+                $("#hamburger-slide").slideUp();
+                // $("#hamburger-slide").css({ "display": "none" });
+                // $("#hamburger").show();
+            });
+
+        });
+    </script>
+</head>
+
+<body id="body">
+
+    
+
+   <!-- header code is on views/includes/header.ejs file -->
+   <%- include('includes/header')%>
+   <!-- header code is between this comments -->
+
+
+
+    <!-- main code starts from here -->
+
+    <main id="suggestion-file" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+
+
+        <form action="https://formspree.io/f/mwpkegln" id="myForm" method="POST" class="suggestionFormDiv">
+
+            <input type="hidden" name="access_key" value="1ef959d5-c666-4263-9c17-11e080ffa78d">
+
+            <br><br><br>
+            <h4 style="padding: 0px 10px;">Personal Information*</h4>
+            <div style="display: flex; flex-wrap: wrap;">
+                <input type="text" placeholder="Name" required name="Name">
+                <input type="number" placeholder="Contact No." name="Mobile-No" required>
+                <input type="email" placeholder="Email id." name="Email" required>
+                <input type="text" placeholder="State" name="State" required>
+                <input type="text" placeholder="City" name="City" required>
+                <input type="text" placeholder="District" name="District" required>
+                <input list="Buisness-Type" name="Buisness-Type" name="Buisness-Type" placeholder="Buisness-Type"
+                    required>
+                <datalist id="Buisness-Type">
+                    <option value="Farmer">Farmer</option>
+                    <option value="Residental">Residental</option>
+                </datalist>
+
+                <input list="Find-form" name="find-form" placeholder="Find Form" required name="Find-form">
+                <datalist id="Find-form">
+                    <option value="Farmer">Farmer</option>
+                    <option value="Residental">Residental</option>
+                </datalist>
+
+            </div>
+
+            <br><br><br>
+            <h4 style="padding: 0px 10px;">Requirement Of Pumps*</h4>
+            <br>
+            <div>
+                <input type="text" placeholder="Type Of Products" required name="Type-Of-Products">
+
+                <input type="text" placeholder="Head (Distance)" id="result" required name="Head"><span id="calc"
+                    onclick="opens()">?</span>
+
+
+                <input list="flow" name="flow" placeholder="Flow" required name="Flow">
+                <datalist id="flow">
+                    <option value="Farmer">Farmer</option>
+                    <option value="Residental">Residental</option>
+                </datalist>
+
+                <select id="pipe-size" required name="pipe-size">
+                    <option value="pipe-size">Pipe-size</option>
+                    <option value="110">110(mm)</option>
+                    <option value="160">160(mm)</option>
+                    <option value="200">200(mm)</option>
+                </select>
+
+                <select name="" id="phase" required name="phase">
+                    <option value="">Phase</option>
+                    <option value="">Single Phase</option>
+                    <option value="">Multi-dimension Phase</option>
+                </select>
+
+                <br><br>
+
+                <h4 style="padding: 0px 10px;">Frequency*</h4>
+                <div style="margin-left: 10px;">
+                    <label for="50Hz">50Hz</label><input type="radio" name="Frequency" required>
+                    <label for="60Hz">60Hz</label><input type="radio" name="Frequency" required>
+                </div>
+                <br><br>
+
+
+
+                <div>
+                    <button id="button" type="submit">submit</button>
+                </div>
+
+            </div>
+        </form>
+
+
+        <div>
+            <br>
+            <div id="calculator">
+                <div id="calc-part">
+                    <!-- <span id="calc-cross" onclick="closes()">X</span> -->
+                    <h3>Pump Calculator</h3>
+
+                    <label for="flowRate">Flow Rate (gpm):</label>
+                    <input type="number" id="flowRate" required>
+
+                    <label for="pipeLength">Total Pipe Length (feet):</label>
+                    <input type="number" id="pipeLength" required>
+
+                    <label for="pipeDiameter">Nominal Pipe Diameter (inches):</label>
+                    <input type="number" id="pipeDiameter" required>
+
+                    <label for="totalLift">Total Pumping Lift (feet):</label>
+                    <input type="number" id="totalLift" required>
+
+                    <label for="miscHeadLoss">Miscellaneous Head Loss (feet):</label>
+                    <input type="number" id="miscHeadLoss" required>
+
+                    <label for="fitting45">Number of 45° Elbows:</label>
+                    <input type="number" id="fitting45" required value="0">
+
+                    <label for="fitting90">Number of 90° Elbows:</label>
+                    <input type="number" id="fitting90" required value="0">
+
+                    <label for="fittingTee">Number of Tees:</label>
+                    <input type="number" id="fittingTee" required value="0">
+
+                    <button onclick="calculate()">Calculate</button>
+
+                    <h2>Results</h2>
+                    <div id="results"></div>
+
+                    <script>
+                        function calculate() {
+                            // Get input values
+                            const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
+                            const pipeLength = parseFloat(document.getElementById('pipeLength').value);
+                            const pipeDiameterInches = parseFloat(document.getElementById('pipeDiameter').value);
+                            const totalLift = parseFloat(document.getElementById('totalLift').value);
+                            const miscHeadLoss = parseFloat(document.getElementById('miscHeadLoss').value);
+                            const fitting45 = parseInt(document.getElementById('fitting45').value);
+                            const fitting90 = parseInt(document.getElementById('fitting90').value);
+                            const fittingTee = parseInt(document.getElementById('fittingTee').value);
+
+                            // Convert flow rate to cubic feet per second
+                            const flowRateCFS = (flowRateGPM * 0.133681) / 60; // gpm to ft³/s
+
+                            // Convert diameter to feet
+                            const pipeDiameterFeet = pipeDiameterInches / 12;
+
+                            // Calculate cross-sectional area
+                            const area = Math.PI * Math.pow(pipeDiameterFeet / 2, 2);
+
+                            // Calculate flow velocity
+                            const velocity = flowRateCFS / area;
+
+                            // Calculate head loss due to pipe friction (using Darcy-Weisbach equation)
+                            const frictionFactor = 0.02; // Assumed constant for turbulent flow
+                            const headLossPipe = frictionFactor * (pipeLength / pipeDiameterFeet) * Math.pow(velocity, 2) / (2 * 32.2); // Convert g to ft/s²
+
+                            // Calculate head loss due to fittings
+                            const fittingLoss45 = fitting45 * 0.3 * Math.pow(velocity, 2) / (2 * 32.2);
+                            const fittingLoss90 = fitting90 * 0.5 * Math.pow(velocity, 2) / (2 * 32.2);
+                            const fittingLossTee = fittingTee * 0.4 * Math.pow(velocity, 2) / (2 * 32.2);
+                            const fittingHeadLoss = fittingLoss45 + fittingLoss90 + fittingLossTee;
+
+                            // Total pump head required
+                            const totalPumpHead = totalLift + headLossPipe + fittingHeadLoss + miscHeadLoss;
+
+                            // Pressure loss (psi)
+                            const pressureLoss = totalPumpHead * 0.433; // Convert ft of water to psi (1 ft = 0.433 psi)
+
+                            // Display results
+                            document.getElementById('results').innerHTML = `
+    Flow Velocity: ${velocity.toFixed(2)} ft/s<br>
+    Pipe Head Loss: ${headLossPipe.toFixed(2)} feet<br>
+    Fitting Head Loss: ${fittingHeadLoss.toFixed(2)} feet<br>
+    Vertical Lift: ${totalLift} feet<br>
+    Miscellaneous Head Loss: ${miscHeadLoss} feet<br>
+    Total Pump Head Required: ${totalPumpHead.toFixed(2)} feet<br>
+    Pressure Loss: ${pressureLoss.toFixed(2)} psi
+`;
+                            const show = document.getElementById("result").value = `${totalPumpHead.toFixed(2)}`;
+
+
+                        }
+
+                        const form = document.getElementById('myForm');
+                        const inputNumber = document.getElementById('result');
+
+                        form.addEventListener('submit', (e) => {
+                            if (isNaN(result.value)) {
+                                e.preventDefault();
+                                alert('Please enter a valid Head (distance)');
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+
+
+
+        </div>
+    </main>
+
+
+
+   <!-- footer code is on views/includes/footer.ejs file -->
+   <%- include('includes/footer')%>
+   <!-- footer code is between this comments -->
+
+
+
+
+
+
+    <div id="back-top">
+        <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+    </div>
+
+</body>
+
+</html>

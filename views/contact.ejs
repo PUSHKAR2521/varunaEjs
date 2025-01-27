@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/utility.css">
+
+
+    <script>
+        $(document).ready(function () {
+            $("#hamburger").click(function () {
+                $("#hamburger-slide").show();
+                $("#hamburger-slide").css({ "height": "150vh", "width": "100vw", "left": "0px", "background-color": "white", "position": "absolute", "top": "-70px", "z-index": "10" });
+            });
+
+            $("#cross-icon").click(function () {
+                // $("#hamburger").hide();
+                $("#hamburger-slide").slideUp();
+                // $("#hamburger-slide").css({ "display": "none" });
+                // $("#hamburger").show();
+            });
+
+
+
+        });
+    </script>
+</head>
+
+<body>
+
+
+    <!-- header code is on views/includes/header.ejs file -->
+    <%- include('includes/header')%>
+        <!-- header code is between this comments -->
+
+
+    <div style="background-color: grey; width: 100vw; height: 250px; background-size: contain; opacity: 0.8;">
+        <h3 style="color: white; text-align: center;padding-top: 90px;">Contact
+        </h3>
+        <div style="color: white; text-align: center; font-size: 20px; font-weight: 500;"><a href="/"
+                style="color: white; text-decoration: none; text-align: center;">Home</a>&nbsp;&nbsp;&nbsp; |
+            &nbsp;&nbsp;&nbsp;<a href="/contact" style="color: white; text-decoration: none; text-align: center;">
+                Contact</a></div>
+    </div>
+
+
+    <main>
+
+        <div class="main-1partdiv">
+            <div class="main1-3div">
+                <h4 style="margin-left: 25px;  padding: 20px;" class="main-1txt">
+                    Addresses
+                </h4>
+
+                <div class="main1-img"
+                    style="background-image: url(https://www.varunaelectric.com/wp-content/uploads/Addresses-contact-landing-dummy.png.webp);">
+                </div>
+
+                <a href="Address.html" style="color: white; text-decoration: none;">
+                    <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+                </a>
+
+                <a href="Address.html">
+                    <div class="circle"
+                        style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+                        <i class="fa-solid fa-chevron-right"
+                            style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+                    </div>
+                </a>
+
+                <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;" class="main-1txt">
+                    We have over 20+ branches spread over the country and our export web is spread over 50+ countries
+                    around the globe.
+                </p>
+            </div>
+
+            <div class="main1-3div">
+                <h4 style="margin-left: 25px; padding: 20px;">
+                    Service Centre
+                </h4>
+
+                <div class="main1-img"
+                    style="background-image: url(https://www.varunaelectric.com/wp-content/uploads/Service-Center.jpg.webp);">
+                </div>
+
+                <a href="Service-center.html" style="color: white; text-decoration: none;">
+                    <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+                </a>
+
+                <a href="Service-center.html">
+                    <div class="circle"
+                        style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+                        <i class="fa-solid fa-chevron-right"
+                            style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+                    </div>
+                </a>
+
+
+                <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">
+                    In addition to our high-quality pumps, our company also offers further services to our valued
+                    customers.
+                </p>
+            </div>
+
+            <div class="main1-3div">
+                <h4 style="margin-left: 25px;  padding: 20px;">
+                    Complaint Form
+                </h4>
+
+                <div class="main1-img"
+                    style="background-image: url(https://www.varunaelectric.com/wp-content/uploads/complaint-form.png.webp);">
+                </div>
+
+                <a href="Complaint-form.html" style="color: black; text-decoration: none;">
+                    <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+                </a>
+
+                <a href="Complaint-form.html">
+                    <div class="circle"
+                        style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+                        <i class="fa-solid fa-chevron-right"
+                            style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+                    </div>
+                </a>
+
+
+                <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">
+                    Client feedback helps us improve our product quality. Write to us in case of a complaint regarding
+                    any product or service.
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="main-2partdiv" stylbe="margin-top: -30px;">
+            <div class="main2-3div">
+                <h4 style="margin-left: 25px;  padding: 20px;">
+                    Warranty Registration
+                </h4>
+
+                <div class="main1-img"
+                    style="background-image: url(https://www.varunaelectric.com/wp-content/uploads/registration.png.webp);">
+                </div>
+
+                <a href="Warranty-registraion.html" style="color: black; text-decoration: none;">
+                    <h5 style="margin-left: 110px; margin-top: -43px;">click here</h5>
+                </a>
+
+                <a href="Warranty-registraion.html">
+                    <div class="circle"
+                        style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 190px; margin-top: -43px;">
+                        <i class="fa-solid fa-chevron-right"
+                            style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+                    </div>
+                </a>
+
+
+                <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">
+                    Register your product on our mobile app and view your warranty details anytime, anywhere!
+                </p>
+            </div>
+
+            <div class="main2-3div">
+                <h4 style="margin-left: 25px;  padding: 20px;">
+                    Write To Us
+                </h4>
+
+                <div class="main1-img"
+                    style="background-image: url(https://www.varunaelectric.com/wp-content/uploads/Write-to-Us-contact-landing-dummy.png.webp);">
+                </div>
+
+                <a href="Write-to-us.html" style="color: black; text-decoration: none;">
+                    <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+                </a>
+
+                <a href="Write-to-us.html">
+                    <div class="circle"
+                        style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+                        <i class="fa-solid fa-chevron-right"
+                            style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+                    </div>
+                </a>
+
+
+                <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">
+                    Contact us for general information regarding Varuna Electrical or write to us for product or
+                    partnership inquires.
+                </p>
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+
+
+   <!-- footer code is on views/includes/footer.ejs file -->
+    <%- include('includes/footer')%>
+        <!-- footer code is between this comments -->
+
+
+
+
+
+    <div id="back-top">
+        <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+    </div>
+
+</body>
+
+</html>

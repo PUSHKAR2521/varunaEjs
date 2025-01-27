@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="refresh"  content="10"> this meta is for refrshing page  -->
+  <title>about-varuna</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <link rel="stylesheet" href="css/aboutVaruna.css">
+  <link rel="stylesheet" href="/css/utility.css">
+  <script src="public/js/dark_mode.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+      $("#visit").click(function () {
+        $("#warning").hide();
+      });
+
+
+
+      $("#hamburger").click(function () {
+        $("#hamburger-slide").show();
+        $("#hamburger-slide").css({
+          "height": "150vh", "width": "100vw", "left": "0px", "background-color": "white",
+          "position": "absolute", "top": "-70px", "z-index": "10"
+        });
+      });
+
+      $("#cross-icon").click(function () {
+        // $("#hamburger").hide();
+        $("#hamburger-slide").slideUp();
+        // $("#hamburger-slide").css({ "display": "none" });
+        // $("#hamburger").show();
+      });
+
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <!-- header code is on views/includes/header.ejs file -->
+  <%- include('includes/header')%>
+    <!-- header code is between this comments -->
+
+
+
+    <img src="images/about-varuna-img.jpg" alt="" style="width: 100vw; height: 220px; opacity: 1;">
+    <h4
+      style="margin-top: -200px; font-weight: 800px; opacity: 9; text-align: center; margin-left: -60px; padding-top: 40px;">
+      About</h4>
+    <h5 style="text-align: center;"><a href="/"
+        style="color: red; text-decoration: none;">Home</a>&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;<a
+        href="/aboutVaruna" style="color: red; text-decoration: none;">About Varuna
+      </a></h5>
+
+
+    <main>
+
+      <div class="main-1partdiv">
+        <div class="main1-3div">
+          <h4 style="margin-left: 25px;  padding: 20px;" class="main-1txt">About us
+          </h4>
+
+          <div class="main1-img" style="background-image: url(images/About-Us-img.webp);">
+          </div>
+
+          <a href="about-company.html" style="color: white; text-decoration: none;">
+            <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+          </a>
+
+          <a href="about-company.html">
+            <div class="circle"
+              style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+              <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+            </div>
+          </a>
+
+          <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;" class="main-1txt">With a pan-India
+            presence of over 20 branches and 600+ distributors, Varuna Electric brings innovative pumping solutions to
+            the
+            global market
+          </p>
+        </div>
+
+        <div class="main1-3div">
+          <h4 style="margin-left: 25px; padding: 20px;">Board of Directors
+          </h4>
+
+          <div class="main1-img" style="background-image: url(images/BOD.png.webp);"></div>
+
+          <a href="bod.html" style="color: black; text-decoration: none;">
+            <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+          </a>
+
+          <a href="bod.html">
+            <div class="circle"
+              style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+              <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+            </div>
+          </a>
+
+
+          <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">Our Board of Directors helps ensure
+            that
+            our company continues to operate smoothly and efficiently.
+          </p>
+        </div>
+
+        <div class="main1-3div">
+          <h4 style="margin-left: 25px;  padding: 20px;">Milestones
+          </h4>
+
+          <div class="main1-img" style="background-image: url(images/Milestones.png.webp);"></div>
+
+          <a href="milestone.html" style="color: black; text-decoration: none;">
+            <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+          </a>
+
+          <a href="milestone.html">
+            <div class="circle"
+              style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+              <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+            </div>
+          </a>
+
+
+          <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">Over the years, we have proved on
+            several
+            occasions to be a recognized leader of the pumping market.
+          </p>
+        </div>
+      </div>
+
+
+
+      <div class="main-2partdiv" stylbe="margin-top: -30px;">
+        <div class="main2-3div">
+          <h4 style="margin-left: 25px;  padding: 20px;">Infrastructure
+          </h4>
+
+          <div class="main1-img" style="background-image: url(images/infastructure-img.jpg);"></div>
+
+          <a href="infrastructure.html" style="color: white; text-decoration: none;">
+            <h5 style="margin-left: 110px; margin-top: -43px;">click here</h5>
+          </a>
+
+          <a href="infrastructure.html">
+            <div class="circle"
+              style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 190px; margin-top: -43px;">
+              <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+            </div>
+          </a>
+
+
+          <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">What makes our great products even
+            better
+            is our highly-equipped and well-developed infrastructure facility.
+          </p>
+        </div>
+
+        <div class="main2-3div">
+          <h4 style="margin-left: 25px;  padding: 20px;">Company Policies
+          </h4>
+
+          <div class="main1-img" style="background-image: url(images/company-policy-img.webp);"></div>
+
+          <a href="company-policy.html" style="color: white; text-decoration: none;">
+            <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+          </a>
+
+          <a href="company-policy.html">
+            <div class="circle"
+              style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+              <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+            </div>
+          </a>
+
+
+          <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">The functioning of our company is
+            transparent in nature and we abide by our policies under all circumstances.
+          </p>
+        </div>
+
+        <div class="main2-3div">
+          <h4 style="margin-left: 25px;  padding: 20px;">Quality Policy
+          </h4>
+
+          <div class="main1-img" style="background-image: url(images/Quality-policy-img.webp);"></div>
+
+          <a href="quality-policy.html" style="color: red; text-decoration: none;">
+            <h5 style="margin-left: 120px; margin-top: -43px;">click here</h5>
+          </a>
+
+          <a href="quality-policy.html">
+            <div class="circle"
+              style="color: red; height: 50px; width: 50px; border-radius: 50%;border: 2px solid red; border-left: 2px solid transparent; margin-left: 200px; margin-top: -43px;">
+              <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: red; margin-left: 20px;"></i>
+            </div>
+          </a>
+
+
+          <p style="padding-top: 30px; padding-left: 25px; padding-right: 10px;">At Varuna, ‘quality’ is a keyword.
+            Thus,
+            we are committed to delivering the best products and services to our customers.
+          </p>
+        </div>
+      </div>
+
+    </main>
+
+
+
+
+    <%- include('includes/footer')%>
+
+
+
+      <div id="back-top">
+        <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+      </div>
+
+
+
+
+
+</body>
+
+</html>

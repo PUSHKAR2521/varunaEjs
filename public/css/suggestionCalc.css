@@ -1,0 +1,112 @@
+
+
+#calc-part h1,
+h2 {
+    color: #333;
+}
+
+#calc-part label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#calc-part input {
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+#calc-part button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#calc-part button:hover {
+    background-color: #45a049;
+}
+
+#calc-part #results {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+#calc-part #calc-cross{
+    width: auto;
+    height: auto;
+    margin-left: 80%;
+    background-color: red;
+    position: absolute;
+    margin-top: 30px;
+    font-size: 25px;
+    padding: 10px;
+}
+
+
+
+
+/* suggestion code here because  it's not working on suggestion css file*/
+
+
+
+/* form span {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 18px;
+}
+
+input {
+    border-radius: 5px;
+    margin: 10px;
+}
+
+#suggestion-file select {
+    border-radius: 5px;
+    margin: 10px;
+    width: 184px;
+    height: 27px;
+}
+
+#button {
+    width: 100px;
+    border: none;
+    background-color: red;
+    position: absolute;
+    left: 20%;
+    right: 50%;
+    transform: translate(-50% -50%);
+    border-radius: 10px;
+    color: white;
+    padding: 5px;
+    text-align: center;
+
+}
+
+#calculator {
+    display: none;
+    position: absolute;
+    left: 7%;
+    top: 40%;
+    z-index: 10;
+}
+
+#calc-part {
+    overflow-y: scroll;
+
+    width: 90vw;
+    height: 70vh;
+    background-color: rgb(136, 128, 128);
+    border-radius: 10px;
+
+
+}
+
+
+ */

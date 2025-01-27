@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+    <title>Service-center</title>
+    <link rel="stylesheet" href="/css/serviceCenter.css">
+    <link rel="stylesheet" href="/css/utility.css">
+
+    <script>
+        $(document).ready(function () {
+            $("#hamburger").click(function () {
+                $("#hamburger-slide").show();
+                $("#hamburger-slide").css({ "height": "150vh", "width": "100vw", "left": "0px", "background-color": "white", "position": "absolute", "top": "-70px", "z-index": "10" });
+            });
+
+            $("#cross-icon").click(function () {
+                // $("#hamburger").hide();
+                $("#hamburger-slide").slideUp();
+                // $("#hamburger-slide").css({ "display": "none" });
+                // $("#hamburger").show();
+            });
+
+
+
+        });
+    </script>
+</head>
+
+<body>
+
+
+    <!-- header code is on views/includes/header.ejs file -->
+    <%- include('includes/header')%>
+        <!-- header code is between this comments -->
+
+
+
+
+    <!-- main code starts from here -->
+
+    <main style=" height: auto;">
+
+        <div
+            style="background-color: grey; height: 300px; width: 100vw; background-size: cover; color: white; text-align: center; padding-top: 20px;">
+            <h3 style="filter: none; color: white; text-align: center; padding-top: 100px;">Service Center</h3>
+            <div style="padding-top: 20px;">
+                <a href="/" style="color: white; text-decoration: none; text-align: center;">Home</a> &nbsp; |
+                &nbsp; <a href="/contact"
+                    style="color: white; text-decoration: none; text-align: center;">Contact</a>
+                &nbsp; | &nbsp; <a href="/serviceCenter"
+                    style="color: white; text-decoration: none; text-align: center;">Service Center</a>
+            </div>
+        </div>
+
+
+
+
+        <div id="main2">
+
+
+            <div class="main-2part">
+                <div class="main-2txt"
+                    style="background-image: url(https://www.varunaelectric.com/wp-content/uploads/Service-Man.png.webp); width: 150px; height: 250px; background-size: contain; background-repeat: no-repeat; margin-top: 90px; border-radius: 10px; margin-left: 70px;">
+                </div>
+
+                <div class="main-2txt">
+                    <h3>Authorised <span style="color: red;">Service Centre</span></h3>
+                    <p>
+                        The La-Gajjar was established in the year 1935 in Ahmedabad. Our products under the brand name
+                        "VARUNA" are acknowledged for their seamless performance not just in India but also in distance
+                        corners of the world. Varuna Pumps are creating new benchmarks and a pan-India presence with 17
+                        branches and over 1500+ dealers & sub dealers, an export network spread across 50 countries and
+                        an unmatched experience of eight decades.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <br><br>
+        <br>
+
+        <div id="Address">
+
+            <div style="margin-left: 20px; margin-top: 40px;">
+                <h4>Branch <span style="color: red;">Address</span></h4>
+            </div>
+
+            <br>
+
+            <div class="address1">
+                <div class="address1-part" style="background-color: transparent;"> <!--1st-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Plot.No.426, At-Koradakanta,Po- <br>Budheswari, Bhubaneswar - 752101
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 7894405574 <br>
+                        Email : Bhubaneswar@Lgmindia.Com
+                    </p>
+                </div>
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--2nd-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Survey No. 6/2, Makali,Opp. M/s Himalaya <br>Drug Co.,Tumkur Road,BANGALORE <br>INDIA KARNATAKA
+                        562123
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 09880892180 <br>
+                        Email : kcfabangalore@lgmindia.com
+                    </p>
+                </div>
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--3rd-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        43-C, Mangal Nagar, A.B. Road, Near Rajiv <br>Gandhi Chauraha, Indore (Madhya
+                        <br>Pradesh),452014
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 8719090168<br>
+                        Email : Indore@Lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--4th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        141, State Bank Of India Colony, Cherital <br>Ward, Nr, Narmada Nursery, School,<br> Ukhari
+                        Tiraha,Baldevbag, Jabalpur <br>- 482002
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 8719090180<br>
+                        Email : Jabalpur@Lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--5th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        C-60, Road No 1C, Vishwakarma Industrial <br>Area, Jaipur, Rajasthan - 302013
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 0141-6450346 / 4109290<br>
+                        Email : Jaipur@Lgmindia.Com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--6th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Plot NO. 39, Block-I,Scheme- Vyapar <br>Nagar / Ispat Nagar, KANPUR NAGAR, <br>, UttarPradesh -
+                        208020
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 0512-2600630<br>
+                        Email : Kanpur@Lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--7th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Ever Bright WareHouse, NH-6, Chamrail, <br>Kona High Road,Howarah - 711114
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 9748421774<br>
+                        Email : Kolkata@Lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--8th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Plot no 21 Nagrik Gruh Nirman Sahakari <br>Sanstha , Khadgaon Road Wadi, Nagpur <br>- 440023
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 0712 – 6450119<br>
+                        Email : Nagpur@Lgmindia.Com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--9th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Aditya Market, Plot No.- 486, Jakariyapur, <br>Near Krishna Niketan School, Patna <br>- 800007
+                        (Bihar)
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Mobile no : 9709999743 ,<br>
+                        Ph no : 0612-2344458 ,<br>
+                        Email : Patna@Lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--10th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        C/O DEVIKA STAR, MOHINI DWAR, NR <br>ABHINANDAN PALACE,RING ROAD NO.1, <br>KUSHALPUR CHOWK,
+                        RAIPUR
+                        (C.G) <br>-
+                        492001
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 0771-2241175<br>
+                        Email : Raipur@Lgmindia.Com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--11th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        0 - GODAM N JARNAIL ENCLAVE, <br>ZIRAKPUR, MOHALI, PUNJAB - 140603
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Email : Zirakpur@Lgmindia.Com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--12th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Gate No. 1335, Wadki taluka Haveli,Pune <br>- 412308,Maharahstra
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Email : pune@lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--13th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Khatra no. 1161/1162 Saddiq Nagar,Mejar <br>Assaram Tyagi road, Ghaziabad-201001 ,<br>Utter
+                        Pradesh
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Email : ghaziabad@lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--14th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        C/o Quality Coke Industries, Betkuchi, <br>Lokhara, Guwahati - 781034
+
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Email : Raipur@Lgmindia.com<br>
+                        Email : northeasternagency@gmail.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--15th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        251/D Transport Nagar, Block -A, <br>BALICHA, Udaipur - 313001, Rajasthan.
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Email : Jaipur@Lgmindia.com
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--16th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Acidwala Estate, Nagarwel Hanuman <br>Road, Amraiwadi, Ahmedabad, Gujarat <br>380026.
+                    </p>
+                    <p style="margin-left: 25px;">
+                        CIN: U17110GJ1981PTC004263<br>
+                        Toll Free - 1800 258 2565<br>
+                        Mobile - +91- 79- 22777485/487
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--17th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">La-Gajjar Machineries Pvt. Ltd
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Saparom Nayasarai Ring Road, Near <br>lalgutwa Breeze, P. S Nagri, Ranchi, <br>Jharkhand -
+                        835303
+                    </p>
+                    <p style="margin-left: 25px;">
+                        Phone : 0651-6457477<br>
+                        Email : Ranchi@Lgmindia.Com
+                    </p>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div style="margin-left: 20px; margin-top: 40px;">
+                <h4>Factory <span style="color: red;">Address</span></h4>
+            </div>
+
+            <br>
+
+
+
+
+            <div class="address1">
+                <div class="address1-part" style="background-color: transparent;"> <!--1st-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">
+                            La-Gajjar Machineries Pvt. Ltd. <br>(SS Division).
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Acidwala Estate, Opp Sukhrampura Post <br>Office Nagarwel Hanuman Road <br>Amraiwadi, Ahmedabad
+                    </p>
+                </div>
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--2nd-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">
+                            La-Gajjar Machineries Pvt. Ltd. <br>(Agri Division)
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        Texprint House, Chakudia Mahadev Road, <br>Rakhiyal, Ahmedabad .
+                    </p>
+                </div>
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--3rd-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">
+                            La-Gajjar Machineries Pvt. Ltd. <br>(Domestic Division)
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        143, Ajod Dairy, Gomtipur Darwaja, <br>Sukhramnagar, Ahmedabad
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--4th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">
+                            La-Gajjar Machineries Pvt. Ltd. <br>(Pump Division)
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        135, Maruti Complex, Rakhiyal, <br>Ahmedabad
+                    </p>
+                </div>
+
+
+
+                <div class="address1-part" style="background-color: transparent;"> <!--5th-->
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-location-dot" style="color: red; margin-top: 5px; font-size: 20px;"></i>
+                        <h4 style="margin-left: 10px;">
+                            La-Gajjar Machineries Pvt. Ltd. <br>(CMB Division)
+                        </h4>
+                    </div>
+                    <p style="margin-left: 25px;">
+                        4, Shrinath Estate, B/H Amba Estate, <br>Navneet Prakashan Road, <br>Rakhiyal Ahmedabad.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+
+
+   <!-- footer code is on views/includes/footer.ejs file -->
+   <%- include('includes/footer')%>
+   <!-- footer code is between this comments -->
+
+
+
+
+
+    <div id="back-top">
+        <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+    </div>
+
+
+
+</body>
+
+</html>

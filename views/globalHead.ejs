@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Head</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <link rel="stylesheet" href="/css/globalHead.css">
+    <link rel="stylesheet" href="/css/utility.css">
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#image1").click(function () {
+                $("#img1").show();
+                $("#img2").hide();
+                $("#img3").hide();
+                $("#img4").hide();
+            });
+            $("#image2").click(function () {
+                $("#img2").show();
+                $("#img1").hide();
+                $("#img3").hide();
+                $("#img4").hide();
+            });
+            $("#image3").click(function () {
+                $("#img3").show();
+                $("#img2").hide();
+                $("#img1").hide();
+                $("#img4").hide();
+            });
+            $("#image4").click(function () {
+                $("#img4").show();
+                $("#img2").hide();
+                $("#img3").hide();
+                $("#img1").hide();
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+
+    <!-- header code is on views/includes/header.ejs file -->
+    <%- include('includes/header')%>
+        <!-- header code is between this comments -->
+    
+
+
+
+    <!-- main starts from here -->
+
+    <main id="body-main">
+        <img src="public/img/body-img1.png" alt="" style="width: 100vw;" id="img1">
+        <img src="public/img/body-img2.png" alt="" style="display: none; width: 100vw;" id="img2">
+        <img src="public/img/body-img3.png" alt="" style="display: none; width: 100vw;" id="img3">
+        <img src="public/img/body-img4.png" alt="" style="display: none; width: 100vw;" id="img4">
+    </main>
+    <div style="display: flex; margin-left: 50px; margin-top: 50px; gap: 10px;">
+        <input type="radio" name="img" id="image1">
+        <input type="radio" name="img" id="image2">
+        <input type="radio" name="img" id="image3">
+        <input type="radio" name="img" id="image4">
+    </div>
+
+    <div id="body-txt" style="margin-top: 80px;">
+        <h2 id="first-txt">About <span style="color: red;">Varuna Global</span></h2>
+
+        <p id="rd3-txt">What started in 1935 with a unique hand blower, today, Varuna Electric has evolved into one of
+            the
+            most reputed and globally acclaimed brands dealing in submersible pumps and open well motors. With a
+            pan-India
+            presence of over 20 branches and 600+ distributors, export web spread across 50+ countries, and an annual
+            production capacity of over half a million pumps, we are just getting started and intend to set new
+            benchmarks
+            with our pumping solutions. Having more than eight decades worth of experience in the industry, we have
+            genuinely earned the trust of our clients as well as employees with our stellar products and our constant
+            endeavor to uphold the highest quality standards.
+
+        </p>
+
+    </div>
+
+
+
+    <div id="body-grey">
+        <p id="body1-txt" style="color: white;">Leadership and solutions that <span style="color: red;">drive
+                results</span></p>
+
+        <div id="body2-txt">
+
+            <div class="body-item" id="body-item1">0
+                <!-- <span style="font-size: 17px; font-weight: 570; color: white;">Motors and Pumps</span> -->
+            </div>
+            <div class="body-item" id="body-item2">0
+                <!-- <span style="font-size: 17px; font-weight: 570; color: white;">Years of legacy</span> -->
+            </div>
+            <div class="body-item" id="body-item3">0
+                <!-- <span style="font-size: 17px; font-weight: 570; color: white;">Countries</span> -->
+            </div>
+            <div class="body-item" id="body-item4">0
+                <!-- <span style="font-size: 17px; font-weight: 570; color: white;">Produced per minute</span> -->
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>
+        let count1 = 0; // starting number for counter1
+        let count2 = 0; // starting number for counter2
+        let count3 = 0; // starting number for counter3
+        let count4 = 0; // starting number for counter4
+
+        const counter1Element = document.getElementById("body-item1");
+        const counter2Element = document.getElementById("body-item2");
+        const counter3Element = document.getElementById("body-item3");
+        const counter4Element = document.getElementById("body-item4");
+
+        setInterval(function () {
+            if (count1 < 1000) {
+                count1 += 5; // increment by 1-5 every 1 second
+                counter1Element.textContent = count1.toLocaleString() + "+" + " " + "Motors" + "\n" + "Pumps";
+            }
+        }, 15); // increment every 10 milliseconds
+
+        setInterval(function () {
+            if (count2 < 85) {
+                count2 += 1; // increment by 1-5 every 1 second
+                counter2Element.textContent = count2.toLocaleString() + " " + "Years of legacy";
+            }
+        }, 35); // increment every 10 milliseconds
+
+        setInterval(function () {
+            if (count3 < 55) {
+                count3 += 1; // increment by 1-5 every 1 second
+                counter3Element.textContent = count3.toLocaleString() + "+" + " " + "Countries";
+            }
+        }, 55); // increment every 10 milliseconds
+
+        setInterval(function () {
+            if (count4 < 3) {
+                count4 += 1; // increment by 1-5 every 1 second
+                counter4Element.textContent = count4.toLocaleString() + " " + "Pumps" + "\n" + "Produced per minutes";
+            }
+        }, 800); // increment every 10 milliseconds
+    </script>
+
+
+
+
+    <div id="body-4part">
+
+        <div id="body4-1txt">
+            <h4 style="text-align: center; padding-top: 30px;">Our Market <span style="color: red;">Solutions</span>
+            </h4>
+        </div>
+
+
+        <div id="body4-2txt"
+            style="text-align: center; padding-top: 30px; font-family: sans-serif; font-size: 18px; padding-left: 40px; padding-right: 40px;">
+            We at Varuna Electric are dedicated to delivering revolutionary water pumping solutions. With <br>
+            the help of modern technology, reliable resources and innovative solutions, we have introduced a wide
+            range of
+            <br>water pumps and motors.
+        </div>
+
+
+
+        <div id="body4-3txt"> <!--1st--->
+
+            <div class="body4-div4">
+                <div class="body4-imgtxt"><img src="public/img/agriculture-img.webp" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; margin-left: 30px;"></div>
+                <div class="body4-imgtxt"><img src="public/img/Self-Priming-img.png" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; display: none;">
+                    <p style="margin-right: 30px; font-size: 20px; padding-left: 10px; padding-bottom : 100px;">
+                        Submersible
+                        Pumps
+                    </p>
+                </div>
+                <p style="padding-left: 30px; margin-top: -100px; " class="body4-txtp">Submersible Pumps are sturdy
+                    and
+                    robust, made with the aim to reduce water shortage problems in remote areas.
+                </p>
+
+
+                <div class="read-more">
+
+                    <a href="Borewell Submersible.html"
+                        style="text-decoration: none; color: black; margin-top: -70px; font-weight: 100; font-size: 16px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Borewell Submersible.html">
+                            <div class="circle"
+                                style="margin-top: -105px; border: 2px solid black; border-left: 2px solid transparent;">
+                                <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: black;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="body4-div4"> <!--2nd--->
+                <div class="body4-imgtxt"><img src="public/img/domestic&residential-img.webp" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; margin-left: 30px;"></div>
+                <div class="body4-imgtxt"><img src="public/img/Self-Priming-img.png" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; display: none;">
+                    <p style="margin-right: 30px; font-size: 20px; padding-left: 10px; padding-bottom : 100px;">
+                        Monoblock Pumps
+                    </p>
+                </div>
+
+                <p style="padding-left: 30px; margin-top: -100px; " class="body4-txtp">Monoblock Pumps introduced by
+                    Varuna
+                    Electric come with easy installation features, greater efficiency and low maintenance cost
+                </p>
+
+                <div class="read-more">
+
+                    <a href="Centrifugal Monoblock.html"
+                        style="text-decoration: none; color: black; margin-top: -70px; font-weight: 100; font-size: 16px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Centrifugal Monoblock.html">
+                            <div class="circle"
+                                style="margin-top: -105px; border: 2px solid black; border-left: 2px solid transparent;">
+                                <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: black;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="body4-div4"> <!--3rd--->
+                <div class="body4-imgtxt"><img src="public/img/Self-Priming-img.png" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; margin-left: 30px;"></div>
+                <div class="body4-imgtxt"><img src="public/img/Self-Priming-img.png" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; display: none;">
+                    <p style="margin-right: 30px; font-size: 20px; padding-left: 10px; padding-bottom : 100px;">
+                        Self-Priming
+                        Pumps
+                    </p>
+                </div>
+                <p style="padding-left: 30px; margin-top: -100px; " class="body4-txtp">Varuna Electric is dedicated
+                    to develop
+                    modern technology equipped self-priming pumps.
+                </p>
+
+                <div class="read-more">
+
+                    <a href="Centrifugal Regenerative.html"
+                        style="text-decoration: none; color: black; margin-top: -70px; font-weight: 100; font-size: 16px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Centrifugal Regenerative.html">
+                            <div class="circle"
+                                style="margin-top: -105px; border: 2px solid black; border-left: 2px solid transparent;">
+                                <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: black;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="body4-div4"> <!--4th--->
+                <div class="body4-imgtxt"><img src="public/img/Solar-Arrow-img.png" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; margin-left: 30px;"></div>
+                <div class="body4-imgtxt"><img src="public/img/Self-Priming-img.png" alt=""
+                        style="height: 150px; width: 150px; margin-top: -30px; display: none;">
+                    <p style="margin-right: 30px; font-size:20px; padding-left: 10px; padding-bottom : 100px;">Solar
+                        Pumps
+                    </p>
+                </div>
+                <p style="padding-left: 30px; margin-top: -100px; " class="body4-txtp">Solar Pumps work from solar
+                    panels
+                    without need of electricity or batteries as they are driven by electronically commuted motors.
+                </p>
+
+                <div class="read-more">
+
+                    <a href="Solar Pumping System.html"
+                        style="text-decoration: none; color: black; margin-top: -70px; font-weight: 100; font-size: 16px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Solar Pumping System.html">
+                            <div class="circle"
+                                style="margin-top: -105px; border: 2px solid black; border-left: 2px solid transparent;">
+                                <i class="fa-solid fa-chevron-right" style="margin-top: 15px; color: black;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <p style="color: red; text-align: center; margin-top: 50px;font-size: 25px;">Induction Motors</p>
+
+
+    <div class="body-3part">
+
+        <div class="body-3txt" id="body-3txt"><img src="public/img/body-3img.png" alt="" style="display: none;">Designed
+            to
+            fulfil
+            the applications requiring high-performance levels and total reliability for a long time, the newly
+            launched
+            range of Varuna Electrics 3-phase induction motors are offered with Class F insulation and Temperature
+            Rise
+            <div class="read-more">
+                <a href="induction-motors.html"
+                    style="text-decoration: none; color: black; margin-top: -20px; font-weight: 500; font-size: 16px; margin-left: -30px;">Know
+                    More</a>
+                <div class="read">
+                    <a href="induction-motors.html">
+                        <div class="circle" style="margin-top: -53px;"><i class="fa-solid fa-chevron-right"
+                                style="margin-top: 15px; color: red;"></i></div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="body-3txt" style="margin-top: 60px; padding-top: 20px;"><img src="public/img/body-3img.png"
+                id="body-3img" alt=""></div>
+    </div>
+
+
+
+
+    <div id="body-2txt" style="margin-top: 100px;">
+
+        <h3 style="text-align: center; color: red; margin-top: 40px; letter-spacing: 2px;">Industries We Serve</h3>
+
+        <p style="text-align: center; margin-top: 20px; font-size: 20px;">We at Varuna Electric cater to a wide
+            range of
+            business verticals and industries and not only <br> making a difference but leaving our impact across
+            different
+            sectors.
+        </p>
+
+
+        <div id="body-2img">
+            <div class="body-to-img"
+                style="background-image: url(public/img/agriculture-img.webp); background-size: cover; border: 0.2px solid black;">
+                <p class="body-imgtxt" style="color: black;">Agriculture</p>
+
+                <p class="body-2para" style="color: white;">Reducing water shortage <span style="color: red;">problems
+                        in
+                        remote area</span></p>
+
+                <div class="read-more">
+                    <a href="Agriculture.html"
+                        style="text-decoration: none; color: red; margin-top: 30px; font-weight: 800; font-size: 20px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Agriculture.html">
+                            <div class="circle"><i class="fa-solid fa-chevron-right"
+                                    style="margin-top: 15px; color: red;"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="body-to-img"
+                style="background-image: url(public/img/Commercial-img.jpg); background-size: cover;  ">
+                <p class="body-imgtxt">Commercial</p>
+
+                <p class="body-2para">Enfusing energy to the building <br>nation arround the world </p>
+
+                <div class="read-more">
+
+                    <a href="Commercial.html"
+                        style="text-decoration: none; color: white; margin-top: 30px; font-weight: 800; font-size: 20px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Commercial.html">
+                            <div class="circle"><i class="fa-solid fa-chevron-right"
+                                    style="margin-top: 15px; color: red;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="body-to-img"
+                style="background-image: url(public/img/domestic&residential-img.webp); background-size: cover; ">
+                <p class="body-imgtxt">Domestic / <span style="color: red;">Residental</span></p>
+
+                <p class="body-2para" style="color: red;">For the urban and rural dwellers from high-rise buildings
+                    to
+                    independent homes</p>
+
+                <div class="read-more">
+
+                    <a href="Domestic&residental.html"
+                        style="text-decoration: none; color: black; margin-top: 30px; font-weight: 800; font-size: 20px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Domestic&residental.html">
+                            <div class="circle"><i class="fa-solid fa-chevron-right"
+                                    style="margin-top: 15px; color: red;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="body-to-img"
+                style="background-image: url(public/img/Industrial-img.webp); background-size: cover; ">
+                <p class="body-imgtxt" style="color: red;">Indu<span style="color: white;">strial</span></p>
+
+                <p class="body-2para" style="color: white;">Using unstopable energy to drive the industries</p>
+
+                <div class="read-more">
+
+                    <a href="Industrial.html"
+                        style="text-decoration: none; color: white; margin-top: 30px; font-weight: 800; font-size: 20px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Industrial.html">
+                            <div class="circle"><i class="fa-solid fa-chevron-right"
+                                    style="margin-top: 15px; color: red;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="body-to-img" style="background-image: url(public/img/solar-img.webp); background-size: cover; ">
+                <p class="body-imgtxt">Solar</p>
+
+
+                <p class="body-2para" style="color: red;"><span style="color: white;">Bringing the power of</span>
+                    sun to your
+                    service</p>
+
+                <div class="read-more">
+
+                    <a href="Solar.html"
+                        style="text-decoration: none; color: white; margin-top: 30px; font-weight: 800; font-size: 20px;">Read
+                        More</a>
+                    <div class="read">
+                        <a href="Solar.html">
+                            <div class="circle"><i class="fa-solid fa-chevron-right"
+                                    style="margin-top: 15px; color: red;"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <h3 style="color: red; text-align: center; padding-top: 60px;">Follow Us On Instagram</h3>
+
+
+    </main>
+
+
+    <!-- footer code is on views/includes/footer.ejs file -->
+    <%- include('includes/footer')%>
+        <!-- footer code is between this comments -->
+
+
+
+
+
+
+    <div id="back-top">
+        <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+    </div>
+</body>
+
+</html>
