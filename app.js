@@ -102,6 +102,15 @@ app.get('/gallery', function(req,res){
 
 
 
+// 
+app.get('/loginpage', function(req,res){
+    res.render('loginMain')
+})
+
+
+
+
+
 app.get('/csr', function(req,res){
     res.render('csr')
 })
@@ -111,7 +120,6 @@ app.get('/csr', function(req,res){
 app.get('/suggestion', function(req,res){
     res.render('suggestion')
 })
-
 
 
 

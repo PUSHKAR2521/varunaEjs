@@ -1,0 +1,15 @@
+.loginContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.loginContainer button{
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+}
