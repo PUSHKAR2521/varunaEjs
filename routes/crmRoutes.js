@@ -13,7 +13,7 @@ router.get('/', authenticateUser, authorizeRole('crm'), async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-
+ 
 // Send Suggestion to CE
 router.post('/send/:id', authenticateUser, authorizeRole('crm'), async (req, res) => {
     try {

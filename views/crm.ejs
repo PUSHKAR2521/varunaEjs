@@ -22,6 +22,13 @@
                         <th>State</th>
                         <th>City</th>
                         <th>Business Type</th>
+                        <th>Find Form</th>
+                        <th>Type of Products</th>
+                        <th>Head</th>
+                        <th>Flow</th>
+                        <th>PipeSize</th>
+                        <th>Phase</th>
+                        <th>Frequency</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -34,6 +41,13 @@
                             <td><%= suggestion.state %></td>
                             <td><%= suggestion.city %></td>
                             <td><%= suggestion.businessType %></td>
+                            <td><%= suggestion.findForm %></td>
+                            <td><%= suggestion.typeOfProducts %></td>
+                            <td><%= suggestion.head %></td>
+                            <td><%= suggestion.flow %></td>
+                            <td><%= suggestion.pipeSize %></td>
+                            <td><%= suggestion.phase %></td>
+                            <td><%= suggestion.frequency %></td>
                             <td>
                                 <% if (!suggestion.sentToCE) { %>
                                     <form action="/auth/crm/send/<%= suggestion._id %>" method="POST">

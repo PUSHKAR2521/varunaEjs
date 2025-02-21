@@ -101,11 +101,7 @@
                     onclick="opens()">?</span>
 
 
-                <input list="flow" name="flow" placeholder="Flow" required name="Flow">
-                <datalist id="flow">
-                    <option value="Farmer">Farmer</option>
-                    <option value="Residental">Residental</option>
-                </datalist>
+                <input placeholder="Flow" required name="Flow">
 
                 <select id="pipe-size" required name="pipe-size">
                     <option value="pipe-size">Pipe-size</option>
@@ -114,18 +110,18 @@
                     <option value="200">200(mm)</option>
                 </select>
 
-                <select name="" id="phase" required name="phase">
-                    <option value="">Phase</option>
-                    <option value="">Single Phase</option>
-                    <option value="">Multi-dimension Phase</option>
+                <select id="phase" required name="Phase">
+                    <option value="Phase">Phase</option>
+                    <option value="Single Phase">Single Phase</option>
+                    <option value="Multi-dimension Phase">Multi-dimension Phase</option>
                 </select>
 
                 <br><br>
 
                 <h4 style="padding: 0px 10px;">Frequency*</h4>
                 <div style="margin-left: 10px;">
-                    <label for="50Hz">50Hz</label><input type="radio" name="Frequency" required>
-                    <label for="60Hz">60Hz</label><input type="radio" name="Frequency" required>
+                    <label for="50Hz">50Hz</label><input type="radio" name="Frequency" value="50Hz" required>
+                    <label for="60Hz">60Hz</label><input type="radio" name="Frequency" value="60Hz" required>
                 </div>
                 <br><br>
 

@@ -20,11 +20,13 @@ router.post('/suggestionForm', async (req, res) => {
             head: req.body.Head,
             flow: req.body.Flow,
             pipeSize: req.body["pipe-size"],
-            phase: req.body.phase,
+            phase: req.body.Phase,
             frequency: req.body.Frequency
         });
 
         await newSuggestion.save();
+        console.log(req.body);
+
 
         // Find a matching product based on the suggested type
         const product = await Product.findOne({ type: req.body["Type-Of-Products"] });
