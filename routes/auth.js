@@ -5,7 +5,7 @@ const users = [{ username: "a", password: "a" }]; // Example, replace with DB st
 
 // Login Page
 router.get('/login', (req, res) => {
-    res.render('login');
+    res.render('loginMain');
 });
 
 // Handle Login
