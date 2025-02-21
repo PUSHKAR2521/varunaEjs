@@ -1,11 +1,22 @@
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const User = require('./models/User');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const productRoutes = require('./routes/index');
+const adminRoutes = require('./routes/admin');
+const authRoutes = require('./routes/auth');
+
+
+app.use(session({
+  secret: 'bac13156adadw',
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -13,6 +24,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine','ejs');
 app.use(express.static(path.join(__dirname,'public')));
+
+app.use('/product', productRoutes);
+app.use('/admin', adminRoutes);
+app.use('/auth', authRoutes);
+
+
+
+//  login page  code
+mongoose.connect('mongodb+srv://vijaykumar:vijaykumar123@varunaejs.5ruts.mongodb.net/?retryWrites=true&w=majority&appName=varunaejs')
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.get('/', function (req, res) {
     res.render('index');
@@ -108,12 +130,6 @@ app.get('/gallery', function(req,res){
 })
 
 
-
-//  login page  code
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
 const authMiddleware = async (req, res, next) => {
   try {
     const { email } = req.cookies;
@@ -177,14 +193,6 @@ app.post('/login', async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Server error.' });
   }
-});
-
-app.get('/loginpage', (req, res) => {
-  res.render("loginMain");
-});
-
-app.get('/admin', authMiddleware, roleMiddleware('admin'), (req, res) => {
-  res.render("admin");
 });
 
 app.get('/crm', authMiddleware, roleMiddleware('crm'), (req, res) => {
