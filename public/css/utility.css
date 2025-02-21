@@ -261,6 +261,9 @@ body {
     color: black;
 
 }
+.btn-secondary:hover{
+    background-color: transparent !important;
+}
 
 .btn:hover {
     color: #ed1c24;
