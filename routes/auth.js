@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const users = [{ username: process.env.ADMIN_ID, password: process.env.ADMIN_PASSWORD }]; // Example, replace with DB storage
+const users = [{ username: "a", password: "a" }]; // Example, replace with DB storage
 
 // Login Page
 router.get('/login', (req, res) => {
-    res.render('loginMain');
+    res.render('login');
 });
 
 // Handle Login

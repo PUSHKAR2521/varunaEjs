@@ -10,20 +10,36 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // Add Product
-router.post('/add', authMiddleware, async (req, res) => {
-    const { model, motor_rating, head_meters, discharge_lpm, input, stages, description, salient_features, applications, material } = req.body;
-    await Product.create({
-        model,
-        motor_rating,
-        head_meters: head_meters.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num)),
-        discharge_lpm: discharge_lpm.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num)),
-        input,
-        stages,
-        description,
-        salient_features: salient_features.split(','),
-        applications: applications.split(','),
-        material });
-    res.redirect('/admin');
+router.post('/add', async (req, res) => {
+    try {
+        const newProduct = new Product({
+            model: req.body.model,
+            motor_rating: req.body.motor_rating,
+            stages: req.body.stages,
+            head_meters: req.body.head_meters.split(",").map(num => parseFloat(num.trim())),
+            discharge_lpm: req.body.discharge_lpm.split(",").map(num => parseFloat(num.trim())),
+            description: req.body.description,
+            input: req.body.input,
+            salient_features: req.body.salient_features.split(",").map(str => str.trim()),
+            applications: req.body.applications.split(",").map(str => str.trim()),
+            material: req.body.material,
+            images: req.body.images ? req.body.images.split(",") : [],
+            motor_details: req.body.motor_details,
+            pump_details: req.body.pump_details,
+            group: req.body.group,
+            hertz: req.body.hertz,
+            suction_size: req.body.suction_size,
+            delivery_size: req.body.delivery_size,
+            voltage: req.body.voltage,
+            power_supply: req.body.power_supply,
+            type: req.body.type
+        });
+
+        await newProduct.save();
+        res.redirect('/admin');
+    } catch (error) {
+        res.status(500).send("Error adding product");
+    }
 });
 
 // Show Edit Page
@@ -40,23 +56,32 @@ router.get('/edit/:id', async (req, res) => {
 });
 
 // Handle Product Update
-router.post('/update/:id', async (req, res) => {
+router.post('/edit/:id', async (req, res) => {
     try {
-        const { model, motor_rating, stages, head_meters, discharge_lpm, input, material, description, salient_features, applications } = req.body;
+        const updatedProduct = {
+            model: req.body.model,
+            motor_rating: req.body.motor_rating,
+            stages: req.body.stages,
+            head_meters: req.body.head_meters.split(",").map(num => parseFloat(num.trim())),
+            discharge_lpm: req.body.discharge_lpm.split(",").map(num => parseFloat(num.trim())),
+            description: req.body.description,
+            input: req.body.input,
+            salient_features: req.body.salient_features.split(",").map(str => str.trim()),
+            applications: req.body.applications.split(",").map(str => str.trim()),
+            material: req.body.material,
+            images: req.body.images ? req.body.images.split(",") : [],
+            motor_details: req.body.motor_details,
+            pump_details: req.body.pump_details,
+            group: req.body.group,
+            hertz: req.body.hertz,
+            suction_size: req.body.suction_size,
+            delivery_size: req.body.delivery_size,
+            voltage: req.body.voltage,
+            power_supply: req.body.power_supply,
+            type: req.body.type
+        };
 
-        await Product.findByIdAndUpdate(req.params.id, {
-            model,
-            motor_rating,
-            stages,
-            head_meters: head_meters.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num)),
-            discharge_lpm: discharge_lpm.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num)),
-            input,
-            material,
-            description,
-            salient_features: salient_features.split(',').map(item => item.trim()),
-            applications: applications.split(',').map(item => item.trim())
-        });
-
+        await Product.findByIdAndUpdate(req.params.id, updatedProduct);
         res.redirect('/admin');
     } catch (error) {
         res.status(500).send("Error updating product");
