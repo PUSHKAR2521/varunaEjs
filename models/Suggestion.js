@@ -16,7 +16,8 @@ const SuggestionSchema = new mongoose.Schema({
     phase: String,
     frequency: String,
     createdAt: { type: Date, default: Date.now },
-    sentToCE: { type: Boolean, default: false } // New field to track sending status
+    sentToCE: { type: Boolean, default: false }, // New field to track sending status
+    completed: { type: Boolean, default: false } // Added field for tracking
 });
 
 module.exports = mongoose.model('Suggestion', SuggestionSchema);

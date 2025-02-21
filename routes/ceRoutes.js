@@ -14,4 +14,17 @@ router.get('/', authenticateUser, authorizeRole('ce'), async (req, res) => {
     }
 });
 
+// Update completion status
+router.post("/update-status/:id", async (req, res) => {
+    try {
+        const { completed } = req.body;
+        await Suggestion.findByIdAndUpdate(req.params.id, { completed });
+
+        res.redirect('/auth/ce');
+    } catch (error) {
+        console.error(error);
+        res.send({ success: false, message: "Server Error" });
+    }
+});
+
 module.exports = router;
