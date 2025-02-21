@@ -8,58 +8,47 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div class="card">
-            <div class="card-header text-center">
+        <div class="card shadow-lg">
+            <div class="card-header text-center bg-primary text-white">
                 <h2>Product Details</h2>
             </div>
             <div class="card-body">
                 <% if (!product) { %>
                     <p class="text-center text-danger">Product not found.</p>
                 <% } else { %>
-                    <table class="table table-bordered">
-                        <tbody>
-                            <tr>
-                                <th>Model</th>
-                                <td><%= product.model || "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Motor Rating</th>
-                                <td><%= product.motor_rating || "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Stages</th>
-                                <td><%= product.stages || "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Head Meters</th>
-                                <td><%= product.head_meters ? product.head_meters.join(", ") : "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Discharge LPM</th>
-                                <td><%= product.discharge_lpm ? product.discharge_lpm.join(", ") : "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Description</th>
-                                <td><%= product.description || "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Input</th>
-                                <td><img src="<%= product.input || "N/A" %>" style="width: 300px height: 300px" alt="<%= product.model || "N/A" %>"></td>
-                            </tr>
-                            <tr>
-                                <th>Salient Features</th>
-                                <td><%= product.salient_features ? product.salient_features.join(", ") : "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Applications</th>
-                                <td><%= product.applications ? product.applications.join(", ") : "N/A" %></td>
-                            </tr>
-                            <tr>
-                                <th>Material</th>
-                                <td><%= product.material || "N/A" %></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr><th>Model</th> <td><%= product.model || "N/A" %></td></tr>
+                                <tr><th>Motor Rating</th> <td><%= product.motor_rating || "N/A" %></td></tr>
+                                <tr><th>Stages</th> <td><%= product.stages || "N/A" %></td></tr>
+                                <tr><th>Head Meters</th> <td><%= product.head_meters ? product.head_meters.join(", ") : "N/A" %></td></tr>
+                                <tr><th>Discharge LPM</th> <td><%= product.discharge_lpm ? product.discharge_lpm.join(", ") : "N/A" %></td></tr>
+                                <tr><th>Description</th> <td><%= product.description || "N/A" %></td></tr>
+                                <tr><th>Input</th> 
+                                    <td>
+                                        <% if (product.input) { %>
+                                            <img src="<%= product.input %>" class="img-fluid rounded" style="max-width: 300px; max-height: 300px;" alt="<%= product.model || 'Product Image' %>">
+                                        <% } else { %>
+                                            N/A
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <tr><th>Salient Features</th> <td><%= product.salient_features ? product.salient_features.join(", ") : "N/A" %></td></tr>
+                                <tr><th>Applications</th> <td><%= product.applications ? product.applications.join(", ") : "N/A" %></td></tr>
+                                <tr><th>Material</th> <td><%= product.material || "N/A" %></td></tr>
+
+                                <!-- New Fields -->
+                                <tr><th>Group</th> <td><%= product.group || "N/A" %></td></tr>
+                                <tr><th>Hertz</th> <td><%= product.hertz || "N/A" %></td></tr>
+                                <tr><th>Suction Size</th> <td><%= product.suction_size || "N/A" %></td></tr>
+                                <tr><th>Delivery Size</th> <td><%= product.delivery_size || "N/A" %></td></tr>
+                                <tr><th>Voltage</th> <td><%= product.voltage || "N/A" %></td></tr>
+                                <tr><th>Power Supply</th> <td><%= product.power_supply || "N/A" %></td></tr>
+                                <tr><th>Type</th> <td><%= product.type || "N/A" %></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 <% } %>
             </div>
         </div>

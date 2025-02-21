@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
 
+<body class="bg-light">
     <div class="container mt-4">
         <h2 class="text-center mb-4">Admin Dashboard</h2>
-        
+
         <div class="d-flex justify-content-between mb-3">
             <h4>Manage Products</h4>
             <a href="/auth/logout" class="btn btn-danger">Logout</a>
@@ -21,46 +22,90 @@
             <div class="card-header">Add New Product</div>
             <div class="card-body">
                 <form action="/admin/add" method="POST">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" name="model" placeholder="Model" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Model</label>
+                            <input type="text" class="form-control" name="model" required>
                         </div>
-                        <div class="col">
-                            <input type="text" class="form-control" name="motor_rating" placeholder="Motor Rating (e.g., 7.5 HP / 5.5 kW)">
-                        </div>
-                        <div class="col">
-                            <input type="number" class="form-control" name="stages" placeholder="Stages">
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" name="head_meters" placeholder="Head Meters (comma separated)">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Motor Rating</label>
+                            <input type="text" class="form-control" name="motor_rating" required>
                         </div>
-                        <div class="col">
-                            <input type="text" class="form-control" name="discharge_lpm" placeholder="Discharge LPM (comma separated)">
-                        </div>
-                    </div>
 
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" name="input" placeholder="Input">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Stages</label>
+                            <input type="number" class="form-control" name="stages" required>
                         </div>
-                        <div class="col">
-                            <input type="text" class="form-control" name="material" placeholder="Material of Construction">
-                        </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <textarea class="form-control" name="description" placeholder="Description"></textarea>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" name="salient_features" placeholder="Salient Features (comma separated)">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Head Meters (comma separated)</label>
+                            <input type="text" class="form-control" name="head_meters">
                         </div>
-                        <div class="col">
-                            <input type="text" class="form-control" name="applications" placeholder="Applications (comma separated)">
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Discharge LPM (comma separated)</label>
+                            <input type="text" class="form-control" name="discharge_lpm">
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="description"></textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Image Link</label>
+                            <input type="text" class="form-control" name="input">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Salient Features (comma separated)</label>
+                            <input type="text" class="form-control" name="salient_features">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Applications (comma separated)</label>
+                            <input type="text" class="form-control" name="applications">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Material</label>
+                            <input type="text" class="form-control" name="material">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Group</label>
+                            <input type="text" class="form-control" name="group">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Hz</label>
+                            <input type="text" class="form-control" name="hertz">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Suction Size</label>
+                            <input type="text" class="form-control" name="suction_size">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Delivery Size</label>
+                            <input type="text" class="form-control" name="delivery_size">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Voltage</label>
+                            <input type="text" class="form-control" name="voltage">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Power Supply</label>
+                            <input type="text" class="form-control" name="power_supply">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Type</label>
+                            <input type="text" class="form-control" name="type">
                         </div>
                     </div>
 
@@ -97,7 +142,7 @@
                             <% products.forEach((product, index) => { %>
                                 <tr>
                                     <td><%= index + 1 %></td>
-                                    <td><strong><%= product.model|| "N/A" %></strong></td>
+                                    <td><strong><%= product.model || "N/A" %></strong></td>
                                     <td><%= product.motor_rating || "N/A" %></td>
                                     <td><%= product.stages || "N/A" %></td>
                                     <td><%= product.head_meters ? product.head_meters.join(", ") : "N/A" %></td>
@@ -109,8 +154,8 @@
                                     <td><%= product.material || "N/A" %></td>
                                     <td>
                                         <a href="/admin/edit/<%= product._id %>" class="btn btn-sm btn-warning">Edit</a>
-                                        <a href="/admin/delete/<%= product._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-                                        <a href="/product/<%= product._id %>" class="btn btn-sm btn-warning">View Page</a>
+                                        <a href="/admin/delete/<%= product._id %>" class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Are you sure?')">Delete</a>
                                     </td>
                                 </tr>
                             <% }); %>
@@ -123,4 +168,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
