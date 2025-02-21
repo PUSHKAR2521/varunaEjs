@@ -1,7 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const User = require('./models/User');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine','ejs');
@@ -102,12 +109,93 @@ app.get('/gallery', function(req,res){
 
 
 
-// 
-app.get('/loginpage', function(req,res){
-    res.render('loginMain')
-})
+//  login page  code
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
+const authMiddleware = async (req, res, next) => {
+  try {
+    const { email } = req.cookies;
 
+    if (!email) {
+      return res.status(401).json({ message: 'Unauthorized. Please log in.' });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error.' });
+  }
+};
+
+const roleMiddleware = (requiredRole) => {
+  return (req, res, next) => {
+    const user = req.user;
+
+    if (user.role !== requiredRole) {
+      return res.send('Something went wrong');
+    }
+
+    next();
+  };
+};
+
+app.post('/login', async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required.' });
+  }
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    res.cookie('email', email, { httpOnly: true });
+
+    if (user.role === 'admin') {
+      return res.redirect('/admin');
+    } else if (user.role === 'crm') {
+      return res.redirect('/crm');
+    } else if (user.role === 'ce') {
+      return res.redirect('/ce');
+    } else {
+      return res.status(403).json({ message: 'Unauthorized role.' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error.' });
+  }
+});
+
+app.get('/loginpage', (req, res) => {
+  res.render("loginMain");
+});
+
+app.get('/admin', authMiddleware, roleMiddleware('admin'), (req, res) => {
+  res.render("admin");
+});
+
+app.get('/crm', authMiddleware, roleMiddleware('crm'), (req, res) => {
+  res.render("crm");
+});
+
+app.get('/ce', authMiddleware, roleMiddleware('ce'), (req, res) => {
+  res.render("ce");
+});
+
+// login page code ended here
 
 
 
