@@ -67,6 +67,9 @@ app.get('/qualityPolicy', function(req,res){
 // product links / route is not available now coming soon
 
 
+app.get('/product', function(req,res){
+    res.render('product')
+})
 
 app.get('/agriculture', function(req,res){
     res.render('agriculture')
