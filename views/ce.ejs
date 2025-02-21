@@ -1,0 +1,21 @@
+<h1>CE Dashboard</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Mobile No</th>
+        <th>Email</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Business Type</th>
+    </tr>
+    <% suggestions.forEach(suggestion => { %>
+        <tr>
+            <td><%= suggestion.name %></td>
+            <td><%= suggestion.mobileNo %></td>
+            <td><%= suggestion.email %></td>
+            <td><%= suggestion.state %></td>
+            <td><%= suggestion.city %></td>
+            <td><%= suggestion.businessType %></td>
+        </tr>
+    <% }); %>
+</table>

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
-const users = [{ username: "a", password: "a" }]; // Example, replace with DB storage
+const bcrypt = require('bcryptjs');
+const User = require('../models/User');
 
 // Login Page
 router.get('/login', (req, res) => {
@@ -9,14 +9,38 @@ router.get('/login', (req, res) => {
 });
 
 // Handle Login
-router.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-        req.session.user = user;
-        return res.redirect('/admin');
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.send("Invalid credentials");
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.send("Invalid credentials");
+        }
+
+        // Store user session
+        req.session.user = {
+            id: user._id,
+            role: user.role
+        };
+
+        // Redirect based on role
+        switch (user.role) {
+            case 'admin': return res.redirect('/admin');
+            case 'crm': return res.redirect('/auth/crm');
+            case 'ce': return res.redirect('/auth/ce');
+            default: return res.redirect('/user-dashboard');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Server error");
     }
-    res.send("Invalid credentials");
 });
 
 // Logout
