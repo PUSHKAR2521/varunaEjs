@@ -10,10 +10,11 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 // User data with predefined roles
 const users = [
-    { username: "admin", email: "a@a", password: "admin123", role: "admin" },
-    { username: "crm", email: "b@a", password: "crm123", role: "crm" },
-    { username: "ce", email: "c@a", password: "ce123", role: "ce" },
-    { username: "user", email: "d@a", password: "user123", role: "user" } // If you need a regular user role
+    { username: "ce2", email: "ce2@officialbac.xyz", password: "ce2123", role: "ce" },
+    { username: "ce", email: "ce@officialbac.xyz", password: "ce123", role: "ce" },
+    { username: "crm", email: "crm@officialbac.xyz", password: "crm123", role: "crm" },
+    { username: "admin", email: "admin@officialbac.xyz", password: "admin123", role: "admin" },
+    { username: "user", email: "user@officialbac.xyz", password: "user123", role: "user" },
 ];
 
 // Function to insert users

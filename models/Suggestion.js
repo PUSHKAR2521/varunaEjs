@@ -17,6 +17,7 @@ const SuggestionSchema = new mongoose.Schema({
     frequency: String,
     createdAt: { type: Date, default: Date.now },
     sentToCE: { type: Boolean, default: false }, // New field to track sending status
+    ceAssigned: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null }, // Link to CE user
     completed: { type: Boolean, default: false } // Added field for tracking
 });
 

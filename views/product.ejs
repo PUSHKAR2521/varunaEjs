@@ -238,6 +238,29 @@
                         </div>
                     </div>
 
+                    <div class="container mt-4" style="display: flex; flex-direction: column;">
+                      <h3>Customer Reviews</h3>
+                      <% if (product.reviews.length > 0) { %>
+                          <% product.reviews.forEach(review => { %>
+                              <div class="card mb-3">
+                                  <div class="card-body">
+                                      <h5><%= review.user %></h5>
+                                      <p>Rating: 
+                                          <% for (let i = 0; i < review.rating; i++) { %>
+                                              ⭐
+                                          <% } %>
+                                      </p>
+                                      <p><%= review.comment %></p>
+                                      <small class="text-muted">Posted on <%= review.createdAt.toDateString() %></small>
+                                  </div>
+                              </div>
+                          <% }) %>
+                      <% } else { %>
+                          <p>No reviews yet. Be the first to review this product!</p>
+                      <% } %>
+                  </div>
+                  
+
                     <div class="linkhead">
                         <button id="salient">Salient Features</button>
                         <!-- <button id="application">Application</button> -->
@@ -264,6 +287,31 @@
                     </div>
 
                     <% } %>
+
+                    <div class="container mt-4 grid" style="display: flex; flex-direction: column;">
+                      <h3>Leave a Review</h3>
+                      <form action="/product/<%= product._id %>/review" method="POST">
+                          <div class="mb-3">
+                              <label for="user" class="form-label">Your Name</label>
+                              <input type="text" class="form-control" id="user" name="user" required>
+                          </div>
+                          <div class="mb-3">
+                              <label for="rating" class="form-label">Rating (1-5)</label>
+                              <select class="form-control" id="rating" name="rating" required>
+                                  <option value="5">⭐⭐⭐⭐⭐</option>
+                                  <option value="4">⭐⭐⭐⭐</option>
+                                  <option value="3">⭐⭐⭐</option>
+                                  <option value="2">⭐⭐</option>
+                                  <option value="1">⭐</option>
+                              </select>
+                          </div>
+                          <div class="mb-3">
+                              <label for="comment" class="form-label">Your Review</label>
+                              <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit Review</button>
+                      </form>
+                  </div>
 
 
         </div>
