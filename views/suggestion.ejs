@@ -83,7 +83,7 @@
                     <option value="Residental">Residental</option>
                 </datalist>
 
-                <input list="Find-form" name="find-form" placeholder="Find Form" required name="Find-form">
+                <input list="Find-form" name="find-form" placeholder="Find From" required name="Find-form">
                 <datalist id="Find-form">
                     <option value="Farmer">Farmer</option>
                     <option value="Residental">Residental</option>
@@ -95,7 +95,12 @@
             <h4 style="padding: 0px 10px;">Requirement Of Pumps*</h4>
             <br>
             <div>
-                <input type="text" placeholder="Type Of Products" required name="Type-Of-Products">
+                <input type="text" list="typeOfProduct" placeholder="Type Of Products" required name="Type-Of-Products">
+                <datalist id="typeOfProduct">
+                    <option value="HMPS 2H">HMPS 2H</option>
+                    <option value="HMPS">HMPS</option>
+                </datalist>
+
 
                 <input type="text" placeholder="Head (Distance)" id="result" required name="Head"><span id="calc"
                     onclick="opens()">?</span>
