@@ -1,16 +1,16 @@
 const express = require('express');
+const { authenticateUser, authorizeRole } = require('../middlewares/authMiddleware');
 const router = express.Router();
 const Product = require('../models/Product');
-const authMiddleware = require('../middlewares/authMiddleware');
 
-// Show Admin Panel
-router.get('/', authMiddleware, async (req, res) => {
+// Secure Admin Panel (Only for Admins)
+router.get('/', authenticateUser, authorizeRole(['admin']), async (req, res) => {
     const products = await Product.find();
     res.render('admin', { products });
 });
 
-// Add Product
-router.post('/add', async (req, res) => {
+// Secure Product Addition
+router.post('/add', authenticateUser, authorizeRole(['admin']), async (req, res) => {
     try {
         const newProduct = new Product({
             model: req.body.model,
@@ -42,8 +42,8 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// Show Edit Page
-router.get('/edit/:id', async (req, res) => {
+// Show Edit Page (Only for Admins)
+router.get('/edit/:id', authenticateUser, authorizeRole(['admin']), async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
@@ -55,8 +55,8 @@ router.get('/edit/:id', async (req, res) => {
     }
 });
 
-// Handle Product Update
-router.post('/edit/:id', async (req, res) => {
+// Handle Product Update (Only for Admins)
+router.post('/edit/:id', authenticateUser, authorizeRole(['admin']), async (req, res) => {
     try {
         const updatedProduct = {
             model: req.body.model,
@@ -88,8 +88,8 @@ router.post('/edit/:id', async (req, res) => {
     }
 });
 
-// Handle Product Deletion
-router.get('/delete/:id', async (req, res) => {
+// Handle Product Deletion (Only for Admins)
+router.get('/delete/:id', authenticateUser, authorizeRole(['admin']), async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
         res.redirect('/admin');
