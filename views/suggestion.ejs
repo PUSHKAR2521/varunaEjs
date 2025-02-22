@@ -96,9 +96,16 @@
             <br>
             <div>
 
-                <input type="text" placeholder="Product Name" name="Model" required>
+                <!-- <input type="text" placeholder="Product Name" name="Model" required> -->
 
                 <input type="text" list="typeOfProduct" placeholder="Type Of Products" required name="Type-Of-Products">
+
+                <datalist id="typeOfProduct">
+                    <option value="SUBMERSIBLE">
+                    <option value="BOREWELL">
+                    <option value="MMB SERIES">
+                </datalist>
+            
 
 
                 <input type="text" placeholder="Head (Distance)" id="result" required name="Head"><span id="calc"
@@ -175,7 +182,9 @@
                     <h2>Results</h2>
                     <div id="results"></div>
 
-                    <script>
+                    <!-- old script starts here -->
+
+                    <!-- <script>
                         function calculate() {
                             // Get input values
                             const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
@@ -239,6 +248,83 @@
                                 alert('Please enter a valid Head (distance)');
                             }
                         });
+                    </script> -->
+
+                    <!-- old script ends here -->
+                
+
+                    <script>
+                       function calculate() {
+    // Get input values
+    const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
+    const pipeLength = parseFloat(document.getElementById('pipeLength').value);
+    const pipeDiameterInches = parseFloat(document.getElementById('pipeDiameter').value);
+    const totalLift = parseFloat(document.getElementById('totalLift').value);
+    const miscHeadLoss = parseFloat(document.getElementById('miscHeadLoss').value);
+    const fitting45 = parseInt(document.getElementById('fitting45').value);
+    const fitting90 = parseInt(document.getElementById('fitting90').value);
+    const fittingTee = parseInt(document.getElementById('fittingTee').value);
+
+    // Convert flow rate to cubic feet per second
+    const flowRateCFS = (flowRateGPM * 0.133681) / 60; // gpm to ft³/s
+
+    // Convert diameter to feet
+    const pipeDiameterFeet = pipeDiameterInches / 12;
+
+    // Calculate cross-sectional area
+    const area = Math.PI * Math.pow(pipeDiameterFeet / 2, 2);
+
+    // Calculate flow velocity
+    const velocity = flowRateCFS / area;
+
+    // Calculate head loss due to pipe friction (using Darcy-Weisbach equation)
+    const frictionFactor = 0.02; // Assumed constant for turbulent flow
+    const headLossPipe = frictionFactor * (pipeLength / pipeDiameterFeet) * Math.pow(velocity, 2) / (2 * 32.2); // Convert g to ft/s²
+
+    // Calculate head loss due to fittings
+    const fittingLoss45 = fitting45 * 0.3 * Math.pow(velocity, 2) / (2 * 32.2);
+    const fittingLoss90 = fitting90 * 0.5 * Math.pow(velocity, 2) / (2 * 32.2);
+    const fittingLossTee = fittingTee * 0.4 * Math.pow(velocity, 2) / (2 * 32.2);
+    const fittingHeadLoss = fittingLoss45 + fittingLoss90 + fittingLossTee;
+
+    // Total pump head required
+    const totalPumpHead = totalLift + headLossPipe + fittingHeadLoss + miscHeadLoss;
+
+    // Pressure loss (psi)
+    const pressureLoss = totalPumpHead * 0.433; // Convert ft of water to psi (1 ft = 0.433 psi)
+
+    // Function to format number (rounding down using Math.floor)
+    function formatNumber(num) {
+        return Math.floor(num);
+    }
+
+    // Display results
+    document.getElementById('results').innerHTML = `
+        Flow Velocity: ${formatNumber(velocity)} ft/s<br>
+        Pipe Head Loss: ${formatNumber(headLossPipe)} feet<br>
+        Fitting Head Loss: ${formatNumber(fittingHeadLoss)} feet<br>
+        Vertical Lift: ${totalLift} feet<br>
+        Miscellaneous Head Loss: ${miscHeadLoss} feet<br>
+        Total Pump Head Required: ${formatNumber(totalPumpHead)} feet<br>
+        Pressure Loss: ${formatNumber(pressureLoss)} psi
+    `;
+
+    // Display the formatted result in the input field
+    document.getElementById("result").value = formatNumber(totalPumpHead);
+}
+
+// Form validation
+const form = document.getElementById('myForm');
+
+form.addEventListener('submit', (e) => {
+    const resultInput = document.getElementById('result').value;
+    if (isNaN(resultInput) || resultInput.trim() === '') {
+        e.preventDefault();
+        alert('Please enter a valid Head (distance)');
+    }
+});
+
+
                     </script>
                 </div>
             </div>
