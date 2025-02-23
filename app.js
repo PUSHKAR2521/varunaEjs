@@ -47,8 +47,30 @@ mongoose.connect(process.env.MONGO_URI)
 app.get('/', (req, res) => res.render('index'));
 
 
-// Home Page
-app.get('/suggestion', (req, res) => res.render('suggestion'));
+
+app.get('/aboutVaruna', function (req, res) {
+    res.render('aboutVaruna')
+})
+app.get('/aboutCompany', function (req, res) {
+    res.render('aboutCompany')
+})
+app.get('/bod', function (req, res) {
+    res.render('bod')
+})
+app.get('/milestone', function (req, res) {
+    res.render('milestone')
+})
+app.get('/infrastructure', function (req, res) {
+    res.render('infrastructure')
+})
+app.get('/companyPolicy', function (req, res) {
+    res.render('companyPolicy')
+})
+app.get('/qualityPolicy', function (req, res) {
+    res.render('qualityPolicy')
+})
+
+
 
 app.get('/agriculture', function (req, res) {
     res.render('agriculture')
@@ -134,6 +156,7 @@ app.get('/globalHead', function (req, res) {
     res.render('globalHead')
 })
 
+app.get('/suggestion', (req, res) => res.render('suggestion'));
 
 
 
