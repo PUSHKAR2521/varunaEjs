@@ -100,7 +100,6 @@ const Product = require('../models/Product');
 // Route to handle suggestion form submission
 router.post('/suggestionForm', async (req, res) => {
     try {
-        // Extracting input values
         const {
             Name,
             ["Mobile-No"]: mobileNo,
@@ -145,21 +144,20 @@ router.post('/suggestionForm', async (req, res) => {
         const headValue = Head ? parseFloat(Head) : null;
         const flowValue = Flow ? parseFloat(Flow) : null;
 
-        let product = null;
+        let matchingProducts = [];
 
         if (headValue !== null && flowValue !== null && typeOfProducts) {
-            // Search for a specific product if all three values are provided
-            product = await Product.findOne({
+            // Find products that match all three values
+            matchingProducts = await Product.find({
                 type: typeOfProducts,
                 head_meters: { $gte: headValue - 5, $lte: headValue + 5 }, // ±5 deviation
                 discharge_lpm: { $gte: flowValue - 10, $lte: flowValue + 10 } // ±10 deviation
             });
 
-            if (!product) {
+            // If no exact match, find products matching at least one input
+            if (matchingProducts.length === 0) {
                 console.log("No exact match found, searching for alternatives...");
-                
-                // If no exact match, find a product that matches at least one of the inputs
-                product = await Product.findOne({
+                matchingProducts = await Product.find({
                     $or: [
                         { type: typeOfProducts },
                         { head_meters: { $gte: headValue - 5, $lte: headValue + 5 } },
@@ -169,49 +167,38 @@ router.post('/suggestionForm', async (req, res) => {
             }
         }
 
-        if (!product) {
-            console.log("No matching product found.");
-        } else {
-            console.log("Matching product found:", product.model);
+        if (matchingProducts.length === 0) {
+            return res.render('suggestionResults', { products: [], message: "Product not available." });
         }
 
-        // Redirect to results page, passing product ID if found
-        res.redirect(`/suggestion/results?productId=${product ? product._id : ''}`);
+        res.render('suggestionResults', { products: matchingProducts, message: "" });
+
     } catch (error) {
         console.error("Error in /suggestionForm route:", error);
         res.status(500).send("Server Error");
     }
 });
 
-// Route to display suggested product or all products
+// Route to display results
 router.get('/suggestion/results', async (req, res) => {
     try {
-        let product = null;
-        let allProducts = await Product.find(); // Fetch all products
+        let products = [];
 
         if (req.query.productId) {
-            product = await Product.findById(req.query.productId);
+            let product = await Product.findById(req.query.productId);
+            if (product) {
+                products.push(product);
+            }
         }
 
-        res.render('suggestionResults', { 
-            product, 
-            allProducts, 
-            message: product ? "" : "No exact match found. Here are all available products." 
-        });
+        if (products.length === 0) {
+            products = await Product.find(); // Show all products if no match found
+        }
+
+        res.render('suggestionResults', { products, message: products.length ? "" : "No exact match found." });
     } catch (error) {
         console.error("Error in /suggestion/results route:", error);
         res.status(500).send("No Product Found");
-    }
-});
-
-// Route to display all products on a separate page
-router.get('/all-products', async (req, res) => {
-    try {
-        const allProducts = await Product.find();
-        res.render('allProducts', { allProducts });
-    } catch (error) {
-        console.error("Error fetching all products:", error);
-        res.status(500).send("Error fetching products");
     }
 });
 
