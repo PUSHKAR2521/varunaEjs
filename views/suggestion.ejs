@@ -98,20 +98,23 @@
 
                 <!-- <input type="text" placeholder="Product Name" name="Model" required> -->
 
-                <input type="text" list="typeOfProduct" placeholder="Type Of Products" required name="Type-Of-Products">
+                <!-- <input type="text" list="product" placeholder="Type Of Products" required name="Type-Of-Products"> -->
+                <select name="Type-Of-Products" id="">
+                    <option value="HMPS">HMPS</option>
+                    <option value="MINI HMPS">MINI HMPS</option>
+                    <option value="V3 OF & WF">V3 OF & WF</option>
+                    <option value="V4 OF & WF">V4 OF & WF</option>
+                    <option value="V6">V6</option>
+                    <option value="MMB SERIES">MMB SERIES</option>
+                </select>
+                <!-- <datalist id="product">
+                </datalist> -->
 
-                <datalist id="typeOfProduct">
-                    <option value="SUBMERSIBLE">
-                    <option value="BOREWELL">
-                    <option value="MMB SERIES">
-                </datalist>
-            
-
+                
 
                 <div style="display: flex; flex-direction: row;">
                     <input type="text" placeholder="Head (Distance)" id="result" required name="Head"><a style="text-decoration: none;" href="#calculator"><span  id="calculator"
                         >?</span></a>
-
                 </div>
 
                 <input placeholder="Flow" required name="Flow">
