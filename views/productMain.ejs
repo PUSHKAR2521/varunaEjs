@@ -60,30 +60,43 @@
 
   <style>
 
-        .container{
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust box size dynamically */
+    gap: 15px; /* Space between items */
+    padding: 15px;
+    justify-content: center;
+    place-items: center; /* Center items inside the grid */
+}
 
-        .container .subContainer{
-            width: 250px;
-            height: auto;
-            padding: 15px;
-            background-color: grey;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 4px;
-        }
+.container .subContainer {
+    width: 100%; /* Adjust width based on grid */
+    max-width: 350px; /* Prevent it from being too large */
+    height: auto;
+    padding: 15px;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
 
-         img{
-          border-radius: 5px;
-        }
+img {
+    border-radius: 5px;
+    max-width: 100%; /* Make images responsive */
+    height: auto;
+}
+
+/* Mobile-specific fix */
+@media (max-width: 600px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Ensures items are centered on small screens */
+    }
+}
+
   </style>
 
 </head>
@@ -101,7 +114,7 @@
         <div class="container">
             <% products.forEach(product => { %>
                 <div class="subContainer">
-                        <img src="<%= product.input %>" alt="<%= product.type %>" style="width: 200px; height: 200px; object-fit: cover;">
+                        <img src="<%= product.input %>" alt="<%= product.type %>" style="width: 300px; height: 300px; object-fit: fill;">
                         <br>
                         <p style="text-align: justify;"><%= product.model || "N/A" %> - <%= product.type || "N/A" %></p>
                         <a href="/product/<%= product._id %>" style="text-decoration: none; padding: 5px; width: 130px; height: 40px; background-color: red; align-content: center; text-align: center; border-radius: 8px; color: white;">View Product</a>
