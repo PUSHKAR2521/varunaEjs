@@ -30,6 +30,44 @@
     <link rel="stylesheet" href="/css/suggestionCalc.css">
 
 
+    <style>
+        #searchContainer {
+            position: relative;
+            width: 200px;
+        }
+        .product-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            border-top: none;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+        .product-list::-webkit-scrollbar{
+            width: 0px;
+        }
+        .product {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+        }
+        .product:last-child {
+            border-bottom: none;
+        }
+        .product:hover {
+            background-color: #f0f0f0;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
     <script>
         $(document).ready(function () {
             $("#hamburger").click(function () {
@@ -99,17 +137,69 @@
                 <!-- <input type="text" placeholder="Product Name" name="Model" required> -->
 
                 <!-- <input type="text" list="product" placeholder="Type Of Products" required name="Type-Of-Products"> -->
-                <select name="Type-Of-Products" id="">
-                    <option value="HMPS">HMPS</option>
-                    <option value="MINI HMPS">MINI HMPS</option>
-                    <option value="V3 OF & WF">V3 OF & WF</option>
-                    <option value="V4 OF & WF">V4 OF & WF</option>
-                    <option value="V6">V6</option>
-                    <option value="MMB SERIES">MMB SERIES</option>
-                </select>
-                <!-- <datalist id="product">
-                </datalist> -->
-
+                
+                <div id="searchContainer">
+                    <input type="text" id="searchBar" required name="Type-Of-Products" placeholder="Type of Product" onclick="showAllProducts()" onkeyup="searchProducts()">
+                    <div class="product-list" id="productList">
+                        <div class="product" onclick="selectProduct(this)">HMPS</div>
+                        <div class="product" onclick="selectProduct(this)">MINI HMPS</div>
+                        <div class="product" onclick="selectProduct(this)">V3 OF & WF</div>
+                        <div class="product" onclick="selectProduct(this)">V4 OF & WF</div>
+                        <div class="product" onclick="selectProduct(this)">V6</div>
+                        <div class="product" onclick="selectProduct(this)">MMB SERIES</div>
+                    </div>
+                </div>
+            
+                <script>
+                    function showAllProducts() {
+                        let productList = document.getElementById("productList");
+                        let products = document.querySelectorAll(".product");
+            
+                        // Always show the product list when clicking
+                        productList.style.display = "flex";
+            
+                        // Reset all products to be visible
+                        products.forEach(product => product.classList.remove("hidden"));
+                    }
+            
+                    function searchProducts() {
+                        let input = document.getElementById("searchBar").value.toLowerCase().trim();
+                        let products = document.querySelectorAll(".product");
+                        let productList = document.getElementById("productList");
+            
+                        let hasMatch = false;
+                        products.forEach(product => {
+                            let productName = product.textContent.toLowerCase();
+                            if (productName.includes(input)) {
+                                product.classList.remove("hidden");
+                                hasMatch = true;
+                            } else {
+                                product.classList.add("hidden");
+                            }
+                        });
+            
+                        // Show list if there's a match OR if input is empty
+                        if (input === "" || hasMatch) {
+                            productList.style.display = "flex";
+                        } else {
+                            productList.style.display = "none";
+                        }
+                    }
+            
+                    function selectProduct(element) {
+                        document.getElementById("searchBar").value = element.textContent;
+                        document.getElementById("productList").style.display = "none";
+                    }
+            
+                    // Hide product list when clicking outside
+                    document.addEventListener("click", function(event) {
+                        let searchContainer = document.getElementById("searchContainer");
+                        if (!searchContainer.contains(event.target)) {
+                            document.getElementById("productList").style.display = "none";
+                        }
+                    });
+                </script>
+            
                 
 
                 <div style="display: flex; flex-direction: row;">
