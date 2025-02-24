@@ -13,6 +13,13 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
+        // Destroy existing session if another user is logged in
+        if (req.session.user) {
+            console.log(`Logging out existing user: ${req.session.user.role}`);
+            req.session.destroy(() => {
+                req.session = null; // Ensure session is reset
+            });
+        }
         const user = await User.findOne({ email });
 
         if (!user) {
