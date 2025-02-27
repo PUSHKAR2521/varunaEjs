@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register User</title>
+</head>
+
+<body>
+    <h2>Register CE or CRM User</h2>
+    <% if (message) { %>
+        <p>
+            <%= message %>
+        </p>
+        <% } %>
+            <form action="/admin/register" method="POST">
+                <input type="text" name="username" placeholder="Enter username" required>
+                <input type="email" name="email" placeholder="Enter email" required>
+                <input type="password" name="password" placeholder="Enter password" required>
+                <select name="role">
+                    <option value="ce">CE</option>
+                    <option value="crm">CRM</option>
+                </select>
+                <button type="submit">Register</button>
+            </form>
+
+</body>
+
+</html>

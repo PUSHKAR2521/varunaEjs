@@ -2,6 +2,9 @@ const express = require('express');
 const { authenticateUser, authorizeRole } = require('../middlewares/authMiddleware');
 const router = express.Router();
 const Product = require('../models/Product');
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+
 
 // Secure Admin Panel (Only for Admins)
 router.get('/', authenticateUser, authorizeRole(['admin']), async (req, res) => {
@@ -98,5 +101,44 @@ router.get('/delete/:id', authenticateUser, authorizeRole(['admin']), async (req
     }
 });
 
+
+// Render Registration Page
+router.get('/register', authenticateUser, authorizeRole(['admin']), (req, res) => {
+    res.render('register', { message: "" });
+});
+
+// Handle Registration
+router.post('/register', authenticateUser, authorizeRole(['admin']), async (req, res) => {
+    const { username, email, password, role } = req.body;
+
+    try {
+        if (!username || !email || !password || !role) {
+            return res.render('register', { message: "All fields are required." });
+        }
+
+        if (!["crm", "ce"].includes(role)) {
+            return res.render('register', { message: "Invalid role. Only CRM and CE can be registered." });
+        }
+
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.render('register', { message: "Email is already registered." });
+        }
+
+        const newUser = new User({
+            username,
+            email,
+            password,
+            role
+        });
+
+        await newUser.save();
+        res.render('register', { message: "User registered successfully!" });
+
+    } catch (error) {
+        console.error("Error registering user:", error);
+        res.render('register', { message: "Server error. Please try again later." });
+    }
+});
 
 module.exports = router;

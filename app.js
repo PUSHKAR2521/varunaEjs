@@ -20,7 +20,8 @@ const app = express();
 app.use(session({
     secret: 'bac13156adadw',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: { secure: false } // Set to `true` if using HTTPS
 }));
 app.use(bodyParser.json());
 app.use(cookieParser());
