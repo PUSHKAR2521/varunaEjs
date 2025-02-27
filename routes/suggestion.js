@@ -188,7 +188,7 @@ router.post('/suggestionForm', async (req, res) => {
         // }
 
         if (matchingProducts.length === 0) {
-            return res.render('suggestionResults', { products: [], message: "No product available within the given range." });
+            return res.render('suggestionResults', { products: [], message: "No product available within the given range. considerly Contact to company" });
         }
 
         res.render('suggestionResults', { products: matchingProducts, message: "" });
