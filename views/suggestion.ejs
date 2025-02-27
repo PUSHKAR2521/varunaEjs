@@ -105,172 +105,175 @@
         <!-- main code starts from here -->
 
         <main id="suggestion-file"
-    style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+            style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
 
-    <form action="/suggestionForm" id="myForm" method="post" class="suggestionFormDiv">
+            <form action="/suggestionForm" id="myForm" method="post" class="suggestionFormDiv">
 
-        <input type="hidden" name="access_key" value="1ef959d5-c666-4263-9c17-11e080ffa78d">
+                <input type="hidden" name="access_key" value="1ef959d5-c666-4263-9c17-11e080ffa78d">
 
-        <br><br><br>
-        <h4 style="padding: 0px 10px;">Personal Information*</h4>
-        <div style="display: flex; flex-wrap: wrap;">
-            <input type="text" placeholder="Name" required name="Name">
-            <input type="number" placeholder="Contact No." name="Mobile-No" required>
-            <input type="email" placeholder="Email id." name="Email" required>
-            <input type="text" placeholder="State" name="State" required>
-            <input type="text" placeholder="City" name="City" required>
-            <input type="text" placeholder="District" name="District" required>
+                <br><br><br>
+                <h4 style="padding: 0px 10px;">Personal Information*</h4>
+                <div style="display: flex; flex-wrap: wrap;">
+                    <input type="text" placeholder="Name" required name="Name">
+                    <input type="number" placeholder="Contact No." name="Mobile-No" required>
+                    <input type="email" placeholder="Email id." name="Email" required>
+                    <input type="text" placeholder="State" name="State" required>
+                    <input type="text" placeholder="City" name="City" required>
+                    <input type="text" placeholder="District" name="District" required>
 
-            <input list="Buisness-Type" name="Buisness-Type" placeholder="Business Type" required>
-            <datalist id="Buisness-Type">
-                <option value="Farmer">Farmer</option>
-                <option value="Residential">Residential</option>
-            </datalist>
+                    <input list="Buisness-Type" name="Buisness-Type" placeholder="Business Type" required>
+                    <datalist id="Buisness-Type">
+                        <option value="Farmer">Farmer</option>
+                        <option value="Residential">Residential</option>
+                    </datalist>
 
-            <input list="Find-form" name="Find-form" placeholder="Find From" required>
-            <datalist id="Find-form">
-                <option value="Farmer">Farmer</option>
-                <option value="Residential">Residential</option>
-            </datalist>
-        </div>
+                    <input list="Find-form" name="Find-form" placeholder="Find From" required>
+                    <datalist id="Find-form">
+                        <option value="Farmer">Farmer</option>
+                        <option value="Residential">Residential</option>
+                    </datalist>
+                </div>
 
-        <br><br><br>
-        <h4 style="padding: 0px 10px;">Requirement Of Pumps*</h4>
-        <br>
+                <br><br><br>
+                <h4 style="padding: 0px 10px;">Requirement Of Pumps*</h4>
+                <br>
 
-        <label for="typeOfProducts">Select Product Type:</label>
-        <select id="typeOfProducts" name="Type-Of-Products" required>
-            <option value="">-- Select Product Type --</option>
-            <% productTypes.forEach(type=> { %>
-                <option value="<%= type %>">
-                    <%= type %>
-                </option>
-            <% }); %>
-        </select>
+                <label for="typeOfProducts">Select Product Type:</label>
+                <select id="typeOfProducts" name="Type-Of-Products" required>
+                    <option value="">-- Select Product Type --</option>
+                    <% productTypes.forEach(type=> { %>
+                        <option value="<%= type %>">
+                            <%= type %>
+                        </option>
+                        <% }); %>
+                </select>
 
-        <label for="head">Head (meters):</label>
-        <input type="text" id="head" name="Head" placeholder="Min - Max" required>
+                <!-- <label for="head">Head (meters):</label> -->
+                <div style="display: flex; align-items: center;">
+                    <input type="text" id="head" name="Head" placeholder="Min - Max (Head)" required
+                        style="width: 200px;">
+                        <a href="#calcNavigation" style="text-decoration: none;"><span id="calcNavigation">?</span></a>
+                </div>
+                <!-- <label for="flow">Flow (LPM):</label> -->
+                <input type="text" id="flow" name="Flow" placeholder="Min - Max (Flow)" required style="width: 200px;">
 
-        <label for="flow">Flow (LPM):</label>
-        <input type="text" id="flow" name="Flow" placeholder="Min - Max" required>
+                <script>
+                    document.getElementById("typeOfProducts").addEventListener("change", function () {
+                        const selectedType = this.value;
 
-        <script>
-            document.getElementById("typeOfProducts").addEventListener("change", function () {
-                const selectedType = this.value;
+                        if (selectedType) {
+                            fetch(`/get-product-details?type=${selectedType}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.error) {
+                                        alert(data.error);
+                                    } else {
+                                        document.getElementById("head").placeholder = `${data.head.min} - ${data.head.max} (head) `;
+                                        document.getElementById("flow").placeholder = `${data.flow.min} - ${data.flow.max} (flow)`;
+                                    }
+                                })
+                                .catch(error => console.error("Error fetching product details:", error));
+                        }
+                    });
+                </script>
 
-                if (selectedType) {
-                    fetch(`/get-product-details?type=${selectedType}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.error) {
-                                alert(data.error);
-                            } else {
-                                document.getElementById("head").placeholder = `${data.head.min} - ${data.head.max}`;
-                                document.getElementById("flow").placeholder = `${data.flow.min} - ${data.flow.max}`;
+                <select id="pipe-size" required name="pipe-size">
+                    <option value="pipe-size">Pipe-size</option>
+                    <option value="110">110(mm)</option>
+                    <option value="160">160(mm)</option>
+                    <option value="200">200(mm)</option>
+                </select>
+
+                <select id="phase" required name="Phase">
+                    <option value="Phase">Phase</option>
+                    <option value="Single Phase">Single Phase</option>
+                    <option value="Multi-dimension Phase">Multi-dimension Phase</option>
+                </select>
+
+                <br><br>
+
+                <h4 style="padding: 0px 10px;">Frequency*</h4>
+                <div style="margin-left: 10px;">
+                    <label for="50Hz">50Hz</label><input type="radio" name="Frequency" value="50Hz" required>
+                    <label for="60Hz">60Hz</label><input type="radio" name="Frequency" value="60Hz" required>
+                </div>
+                <br><br>
+
+                <div>
+                    <button id="button" type="submit">Submit</button>
+                </div>
+
+            </form>
+
+            <br>
+            <div id="calculator" style="z-index: 1;">
+                <div id="calc-part">
+                    <h3>Pump Calculator</h3>
+                    <label for="flowRate">Flow Rate (gpm):</label>
+                    <input type="number" id="flowRate" required>
+                    <label for="pipeLength">Total Pipe Length (feet):</label>
+                    <input type="number" id="pipeLength" required>
+                    <label for="pipeDiameter">Nominal Pipe Diameter (inches):</label>
+                    <input type="number" id="pipeDiameter" required>
+                    <label for="totalLift">Total Pumping Lift (feet):</label>
+                    <input type="number" id="totalLift" required>
+                    <label for="miscHeadLoss">Miscellaneous Head Loss (feet):</label>
+                    <input type="number" id="miscHeadLoss" required>
+                    <label for="fitting45">Number of 45° Elbows:</label>
+                    <input type="number" id="fitting45" required value="0">
+                    <label for="fitting90">Number of 90° Elbows:</label>
+                    <input type="number" id="fitting90" required value="0">
+                    <label for="fittingTee">Number of Tees:</label>
+                    <input type="number" id="fittingTee" required value="0">
+                    <button onclick="calculate()">Calculate</button>
+                    <h2>Results</h2>
+                    <div id="results"></div>
+
+                    <script>
+                        function calculate() {
+                            const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
+                            const pipeLength = parseFloat(document.getElementById('pipeLength').value);
+                            const pipeDiameterInches = parseFloat(document.getElementById('pipeDiameter').value);
+                            const totalLift = parseFloat(document.getElementById('totalLift').value);
+                            const miscHeadLoss = parseFloat(document.getElementById('miscHeadLoss').value);
+                            const fitting45 = parseInt(document.getElementById('fitting45').value);
+                            const fitting90 = parseInt(document.getElementById('fitting90').value);
+                            const fittingTee = parseInt(document.getElementById('fittingTee').value);
+
+                            const flowRateCFS = (flowRateGPM * 0.133681) / 60;
+                            const pipeDiameterFeet = pipeDiameterInches / 12;
+                            const area = Math.PI * Math.pow(pipeDiameterFeet / 2, 2);
+                            const velocity = flowRateCFS / area;
+
+                            const frictionFactor = 0.02;
+                            const headLossPipe = frictionFactor * (pipeLength / pipeDiameterFeet) * Math.pow(velocity, 2) / (2 * 32.2);
+                            const fittingLoss45 = fitting45 * 0.3 * Math.pow(velocity, 2) / (2 * 32.2);
+                            const fittingLoss90 = fitting90 * 0.5 * Math.pow(velocity, 2) / (2 * 32.2);
+                            const fittingLossTee = fittingTee * 0.4 * Math.pow(velocity, 2) / (2 * 32.2);
+                            const fittingHeadLoss = fittingLoss45 + fittingLoss90 + fittingLossTee;
+
+                            const totalPumpHead = totalLift + headLossPipe + fittingHeadLoss + miscHeadLoss;
+                            const pressureLoss = totalPumpHead * 0.433;
+
+                            function formatNumber(num) {
+                                return Math.floor(num);
                             }
-                        })
-                        .catch(error => console.error("Error fetching product details:", error));
-                }
-            });
-        </script>
 
-        <select id="pipe-size" required name="pipe-size">
-            <option value="pipe-size">Pipe-size</option>
-            <option value="110">110(mm)</option>
-            <option value="160">160(mm)</option>
-            <option value="200">200(mm)</option>
-        </select>
-
-        <select id="phase" required name="Phase">
-            <option value="Phase">Phase</option>
-            <option value="Single Phase">Single Phase</option>
-            <option value="Multi-dimension Phase">Multi-dimension Phase</option>
-        </select>
-
-        <br><br>
-
-        <h4 style="padding: 0px 10px;">Frequency*</h4>
-        <div style="margin-left: 10px;">
-            <label for="50Hz">50Hz</label><input type="radio" name="Frequency" value="50Hz" required>
-            <label for="60Hz">60Hz</label><input type="radio" name="Frequency" value="60Hz" required>
-        </div>
-        <br><br>
-
-        <div>
-            <button id="button" type="submit">Submit</button>
-        </div>
-
-    </form>
-
-    <br>
-    <div id="calculator">
-        <div id="calc-part">
-            <h3>Pump Calculator</h3>
-            <label for="flowRate">Flow Rate (gpm):</label>
-            <input type="number" id="flowRate" required>
-            <label for="pipeLength">Total Pipe Length (feet):</label>
-            <input type="number" id="pipeLength" required>
-            <label for="pipeDiameter">Nominal Pipe Diameter (inches):</label>
-            <input type="number" id="pipeDiameter" required>
-            <label for="totalLift">Total Pumping Lift (feet):</label>
-            <input type="number" id="totalLift" required>
-            <label for="miscHeadLoss">Miscellaneous Head Loss (feet):</label>
-            <input type="number" id="miscHeadLoss" required>
-            <label for="fitting45">Number of 45° Elbows:</label>
-            <input type="number" id="fitting45" required value="0">
-            <label for="fitting90">Number of 90° Elbows:</label>
-            <input type="number" id="fitting90" required value="0">
-            <label for="fittingTee">Number of Tees:</label>
-            <input type="number" id="fittingTee" required value="0">
-            <button onclick="calculate()">Calculate</button>
-            <h2>Results</h2>
-            <div id="results"></div>
-
-            <script>
-                function calculate() {
-                    const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
-                    const pipeLength = parseFloat(document.getElementById('pipeLength').value);
-                    const pipeDiameterInches = parseFloat(document.getElementById('pipeDiameter').value);
-                    const totalLift = parseFloat(document.getElementById('totalLift').value);
-                    const miscHeadLoss = parseFloat(document.getElementById('miscHeadLoss').value);
-                    const fitting45 = parseInt(document.getElementById('fitting45').value);
-                    const fitting90 = parseInt(document.getElementById('fitting90').value);
-                    const fittingTee = parseInt(document.getElementById('fittingTee').value);
-
-                    const flowRateCFS = (flowRateGPM * 0.133681) / 60;
-                    const pipeDiameterFeet = pipeDiameterInches / 12;
-                    const area = Math.PI * Math.pow(pipeDiameterFeet / 2, 2);
-                    const velocity = flowRateCFS / area;
-
-                    const frictionFactor = 0.02;
-                    const headLossPipe = frictionFactor * (pipeLength / pipeDiameterFeet) * Math.pow(velocity, 2) / (2 * 32.2);
-                    const fittingLoss45 = fitting45 * 0.3 * Math.pow(velocity, 2) / (2 * 32.2);
-                    const fittingLoss90 = fitting90 * 0.5 * Math.pow(velocity, 2) / (2 * 32.2);
-                    const fittingLossTee = fittingTee * 0.4 * Math.pow(velocity, 2) / (2 * 32.2);
-                    const fittingHeadLoss = fittingLoss45 + fittingLoss90 + fittingLossTee;
-
-                    const totalPumpHead = totalLift + headLossPipe + fittingHeadLoss + miscHeadLoss;
-                    const pressureLoss = totalPumpHead * 0.433;
-
-                    function formatNumber(num) {
-                        return Math.floor(num);
-                    }
-
-                    document.getElementById('results').innerHTML = `
+                            document.getElementById('results').innerHTML = `
                         Total Pump Head Required: ${formatNumber(totalPumpHead)} feet<br>
                         Pressure Loss: ${formatNumber(pressureLoss)} psi
                     `;
-                }
-            </script>
-        </div>
-    </div>
-</main>
+                        }
+                    </script>
+                </div>
+            </div>
+        </main>
 
-<%- include('includes/footer')%>
+        <%- include('includes/footer')%>
 
-<div id="back-top">
-    <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
-</div>
+            <div id="back-top">
+                <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+            </div>
 
 </body>
 
