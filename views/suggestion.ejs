@@ -19,10 +19,10 @@
 
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
- 
+
 
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="/css/suggestion.css">
@@ -35,6 +35,7 @@
             position: relative;
             width: 200px;
         }
+
         .product-list {
             position: absolute;
             top: 100%;
@@ -50,20 +51,25 @@
             overflow-y: auto;
             border-radius: 8px;
         }
-        .product-list::-webkit-scrollbar{
+
+        .product-list::-webkit-scrollbar {
             width: 0px;
         }
+
         .product {
             padding: 10px;
             cursor: pointer;
             border-bottom: 1px solid #ddd;
         }
+
         .product:last-child {
             border-bottom: none;
         }
+
         .product:hover {
             background-color: #f0f0f0;
         }
+
         .hidden {
             display: none;
         }
@@ -88,362 +94,183 @@
 
 <body id="body">
 
-    
-
-   <!-- header code is on views/includes/header.ejs file -->
-   <%- include('includes/header')%>
-   <!-- header code is between this comments -->
 
 
+    <!-- header code is on views/includes/header.ejs file -->
+    <%- include('includes/header')%>
+        <!-- header code is between this comments -->
 
-    <!-- main code starts from here -->
-
-    <main id="suggestion-file" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
 
 
-        <form action="/suggestionForm" id="myForm" method="post" class="suggestionFormDiv">
+        <!-- main code starts from here -->
 
-            <input type="hidden" name="access_key" value="1ef959d5-c666-4263-9c17-11e080ffa78d">
+        <main id="suggestion-file"
+    style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
 
-            <br><br><br>
-            <h4 style="padding: 0px 10px;">Personal Information*</h4>
-            <div style="display: flex; flex-wrap: wrap;">
-                <input type="text" placeholder="Name" required name="Name">
-                <input type="number" placeholder="Contact No." name="Mobile-No" required>
-                <input type="email" placeholder="Email id." name="Email" required>
-                <input type="text" placeholder="State" name="State" required>
-                <input type="text" placeholder="City" name="City" required>
-                <input type="text" placeholder="District" name="District" required>
-                <input list="Buisness-Type" name="Buisness-Type" name="Buisness-Type" placeholder="Buisness-Type"
-                    required>
-                <datalist id="Buisness-Type">
-                    <option value="Farmer">Farmer</option>
-                    <option value="Residental">Residental</option>
-                </datalist>
+    <form action="/suggestionForm" id="myForm" method="post" class="suggestionFormDiv">
 
-                <input list="Find-form" name="find-form" placeholder="Find From" required name="Find-form">
-                <datalist id="Find-form">
-                    <option value="Farmer">Farmer</option>
-                    <option value="Residental">Residental</option>
-                </datalist>
+        <input type="hidden" name="access_key" value="1ef959d5-c666-4263-9c17-11e080ffa78d">
 
-            </div>
+        <br><br><br>
+        <h4 style="padding: 0px 10px;">Personal Information*</h4>
+        <div style="display: flex; flex-wrap: wrap;">
+            <input type="text" placeholder="Name" required name="Name">
+            <input type="number" placeholder="Contact No." name="Mobile-No" required>
+            <input type="email" placeholder="Email id." name="Email" required>
+            <input type="text" placeholder="State" name="State" required>
+            <input type="text" placeholder="City" name="City" required>
+            <input type="text" placeholder="District" name="District" required>
 
-            <br><br><br>
-            <h4 style="padding: 0px 10px;">Requirement Of Pumps*</h4>
-            <br>
-            <div>
+            <input list="Buisness-Type" name="Buisness-Type" placeholder="Business Type" required>
+            <datalist id="Buisness-Type">
+                <option value="Farmer">Farmer</option>
+                <option value="Residential">Residential</option>
+            </datalist>
 
-                <!-- <input type="text" placeholder="Product Name" name="Model" required> -->
+            <input list="Find-form" name="Find-form" placeholder="Find From" required>
+            <datalist id="Find-form">
+                <option value="Farmer">Farmer</option>
+                <option value="Residential">Residential</option>
+            </datalist>
+        </div>
 
-                <!-- <input type="text" list="product" placeholder="Type Of Products" required name="Type-Of-Products"> -->
-                
-                <div id="searchContainer">
-                    <input type="text" id="searchBar" required name="Type-Of-Products" placeholder="Type of Product" onclick="showAllProducts()" onkeyup="searchProducts()">
-                    <div class="product-list" id="productList">
-                        <div class="product" onclick="selectProduct(this)">HMPS</div>
-                        <div class="product" onclick="selectProduct(this)">MINI HMPS</div>
-                        <div class="product" onclick="selectProduct(this)">V3 OF & WF</div>
-                        <div class="product" onclick="selectProduct(this)">V4 OF & WF</div>
-                        <div class="product" onclick="selectProduct(this)">V6</div>
-                        <div class="product" onclick="selectProduct(this)">MMB SERIES</div>
-                        <div class="product" onclick="selectProduct(this)">CMB SERIES</div>
-                    </div>
-                </div>
-            
-                <script>
-                    function showAllProducts() {
-                        let productList = document.getElementById("productList");
-                        let products = document.querySelectorAll(".product");
-            
-                        // Always show the product list when clicking
-                        productList.style.display = "flex";
-            
-                        // Reset all products to be visible
-                        products.forEach(product => product.classList.remove("hidden"));
-                    }
-            
-                    function searchProducts() {
-                        let input = document.getElementById("searchBar").value.toLowerCase().trim();
-                        let products = document.querySelectorAll(".product");
-                        let productList = document.getElementById("productList");
-            
-                        let hasMatch = false;
-                        products.forEach(product => {
-                            let productName = product.textContent.toLowerCase();
-                            if (productName.includes(input)) {
-                                product.classList.remove("hidden");
-                                hasMatch = true;
+        <br><br><br>
+        <h4 style="padding: 0px 10px;">Requirement Of Pumps*</h4>
+        <br>
+
+        <label for="typeOfProducts">Select Product Type:</label>
+        <select id="typeOfProducts" name="Type-Of-Products" required>
+            <option value="">-- Select Product Type --</option>
+            <% productTypes.forEach(type=> { %>
+                <option value="<%= type %>">
+                    <%= type %>
+                </option>
+            <% }); %>
+        </select>
+
+        <label for="head">Head (meters):</label>
+        <input type="text" id="head" name="Head" placeholder="Min - Max" required>
+
+        <label for="flow">Flow (LPM):</label>
+        <input type="text" id="flow" name="Flow" placeholder="Min - Max" required>
+
+        <script>
+            document.getElementById("typeOfProducts").addEventListener("change", function () {
+                const selectedType = this.value;
+
+                if (selectedType) {
+                    fetch(`/get-product-details?type=${selectedType}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.error) {
+                                alert(data.error);
                             } else {
-                                product.classList.add("hidden");
+                                document.getElementById("head").placeholder = `${data.head.min} - ${data.head.max}`;
+                                document.getElementById("flow").placeholder = `${data.flow.min} - ${data.flow.max}`;
                             }
-                        });
-            
-                        // Show list if there's a match OR if input is empty
-                        if (input === "" || hasMatch) {
-                            productList.style.display = "flex";
-                        } else {
-                            productList.style.display = "none";
-                        }
-                    }
-            
-                    function selectProduct(element) {
-                        document.getElementById("searchBar").value = element.textContent;
-                        document.getElementById("productList").style.display = "none";
-                    }
-            
-                    // Hide product list when clicking outside
-                    document.addEventListener("click", function(event) {
-                        let searchContainer = document.getElementById("searchContainer");
-                        if (!searchContainer.contains(event.target)) {
-                            document.getElementById("productList").style.display = "none";
-                        }
-                    });
-                </script>
-            
-                
+                        })
+                        .catch(error => console.error("Error fetching product details:", error));
+                }
+            });
+        </script>
 
-                <div style="display: flex; flex-direction: row;">
-                    <input type="text" placeholder="Head (Distance)" id="result" required name="Head"><a style="text-decoration: none;" href="#calculator"><span  id="calculator"
-                        >?</span></a>
-                </div>
+        <select id="pipe-size" required name="pipe-size">
+            <option value="pipe-size">Pipe-size</option>
+            <option value="110">110(mm)</option>
+            <option value="160">160(mm)</option>
+            <option value="200">200(mm)</option>
+        </select>
 
-                <input placeholder="Flow" required name="Flow">
+        <select id="phase" required name="Phase">
+            <option value="Phase">Phase</option>
+            <option value="Single Phase">Single Phase</option>
+            <option value="Multi-dimension Phase">Multi-dimension Phase</option>
+        </select>
 
-                <select id="pipe-size" required name="pipe-size">
-                    <option value="pipe-size">Pipe-size</option>
-                    <option value="110">110(mm)</option>
-                    <option value="160">160(mm)</option>
-                    <option value="200">200(mm)</option>
-                </select>
+        <br><br>
 
-                <select id="phase" required name="Phase">
-                    <option value="Phase">Phase</option>
-                    <option value="Single Phase">Single Phase</option>
-                    <option value="Multi-dimension Phase">Multi-dimension Phase</option>
-                </select>
-
-                <br><br>
-
-                <h4 style="padding: 0px 10px;">Frequency*</h4>
-                <div style="margin-left: 10px;">
-                    <label for="50Hz">50Hz</label><input type="radio" name="Frequency" value="50Hz" required>
-                    <label for="60Hz">60Hz</label><input type="radio" name="Frequency" value="60Hz" required>
-                </div>
-                <br><br>
-
-
-
-                <div>
-                    <button id="button" type="submit">submit</button>
-                </div>
-
-            </div>
-        </form>
-
+        <h4 style="padding: 0px 10px;">Frequency*</h4>
+        <div style="margin-left: 10px;">
+            <label for="50Hz">50Hz</label><input type="radio" name="Frequency" value="50Hz" required>
+            <label for="60Hz">60Hz</label><input type="radio" name="Frequency" value="60Hz" required>
+        </div>
+        <br><br>
 
         <div>
-            <br>
-            <div id="calculator">
-                <div id="calc-part">
-                    <!-- <span id="calc-cross" onclick="closes()">X</span> -->
-                    <h3>Pump Calculator</h3>
-
-                    <label for="flowRate">Flow Rate (gpm):</label>
-                    <input type="number" id="flowRate" required>
-
-                    <label for="pipeLength">Total Pipe Length (feet):</label>
-                    <input type="number" id="pipeLength" required>
-
-                    <label for="pipeDiameter">Nominal Pipe Diameter (inches):</label>
-                    <input type="number" id="pipeDiameter" required>
-
-                    <label for="totalLift">Total Pumping Lift (feet):</label>
-                    <input type="number" id="totalLift" required>
-
-                    <label for="miscHeadLoss">Miscellaneous Head Loss (feet):</label>
-                    <input type="number" id="miscHeadLoss" required>
-
-                    <label for="fitting45">Number of 45° Elbows:</label>
-                    <input type="number" id="fitting45" required value="0">
-
-                    <label for="fitting90">Number of 90° Elbows:</label>
-                    <input type="number" id="fitting90" required value="0">
-
-                    <label for="fittingTee">Number of Tees:</label>
-                    <input type="number" id="fittingTee" required value="0">
-
-                    <button onclick="calculate()">Calculate</button>
-
-                    <h2>Results</h2>
-                    <div id="results"></div>
-
-                    <!-- old script starts here -->
-
-                    <!-- <script>
-                        function calculate() {
-                            // Get input values
-                            const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
-                            const pipeLength = parseFloat(document.getElementById('pipeLength').value);
-                            const pipeDiameterInches = parseFloat(document.getElementById('pipeDiameter').value);
-                            const totalLift = parseFloat(document.getElementById('totalLift').value);
-                            const miscHeadLoss = parseFloat(document.getElementById('miscHeadLoss').value);
-                            const fitting45 = parseInt(document.getElementById('fitting45').value);
-                            const fitting90 = parseInt(document.getElementById('fitting90').value);
-                            const fittingTee = parseInt(document.getElementById('fittingTee').value);
-
-                            // Convert flow rate to cubic feet per second
-                            const flowRateCFS = (flowRateGPM * 0.133681) / 60; // gpm to ft³/s
-
-                            // Convert diameter to feet
-                            const pipeDiameterFeet = pipeDiameterInches / 12;
-
-                            // Calculate cross-sectional area
-                            const area = Math.PI * Math.pow(pipeDiameterFeet / 2, 2);
-
-                            // Calculate flow velocity
-                            const velocity = flowRateCFS / area;
-
-                            // Calculate head loss due to pipe friction (using Darcy-Weisbach equation)
-                            const frictionFactor = 0.02; // Assumed constant for turbulent flow
-                            const headLossPipe = frictionFactor * (pipeLength / pipeDiameterFeet) * Math.pow(velocity, 2) / (2 * 32.2); // Convert g to ft/s²
-
-                            // Calculate head loss due to fittings
-                            const fittingLoss45 = fitting45 * 0.3 * Math.pow(velocity, 2) / (2 * 32.2);
-                            const fittingLoss90 = fitting90 * 0.5 * Math.pow(velocity, 2) / (2 * 32.2);
-                            const fittingLossTee = fittingTee * 0.4 * Math.pow(velocity, 2) / (2 * 32.2);
-                            const fittingHeadLoss = fittingLoss45 + fittingLoss90 + fittingLossTee;
-
-                            // Total pump head required
-                            const totalPumpHead = totalLift + headLossPipe + fittingHeadLoss + miscHeadLoss;
-
-                            // Pressure loss (psi)
-                            const pressureLoss = totalPumpHead * 0.433; // Convert ft of water to psi (1 ft = 0.433 psi)
-
-                            // Display results
-                            document.getElementById('results').innerHTML = `
-    Flow Velocity: ${velocity.toFixed(2)} ft/s<br>
-    Pipe Head Loss: ${headLossPipe.toFixed(2)} feet<br>
-    Fitting Head Loss: ${fittingHeadLoss.toFixed(2)} feet<br>
-    Vertical Lift: ${totalLift} feet<br>
-    Miscellaneous Head Loss: ${miscHeadLoss} feet<br>
-    Total Pump Head Required: ${totalPumpHead.toFixed(2)} feet<br>
-    Pressure Loss: ${pressureLoss.toFixed(2)} psi
-`;
-                            const show = document.getElementById("result").value = `${totalPumpHead.toFixed(2)}`;
-
-
-                        }
-
-                        const form = document.getElementById('myForm');
-                        const inputNumber = document.getElementById('result');
-
-                        form.addEventListener('submit', (e) => {
-                            if (isNaN(result.value)) {
-                                e.preventDefault();
-                                alert('Please enter a valid Head (distance)');
-                            }
-                        });
-                    </script> -->
-
-                    <!-- old script ends here -->
-                
-
-                    <script>
-                       function calculate() {
-    // Get input values
-    const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
-    const pipeLength = parseFloat(document.getElementById('pipeLength').value);
-    const pipeDiameterInches = parseFloat(document.getElementById('pipeDiameter').value);
-    const totalLift = parseFloat(document.getElementById('totalLift').value);
-    const miscHeadLoss = parseFloat(document.getElementById('miscHeadLoss').value);
-    const fitting45 = parseInt(document.getElementById('fitting45').value);
-    const fitting90 = parseInt(document.getElementById('fitting90').value);
-    const fittingTee = parseInt(document.getElementById('fittingTee').value);
-
-    // Convert flow rate to cubic feet per second
-    const flowRateCFS = (flowRateGPM * 0.133681) / 60; // gpm to ft³/s
-
-    // Convert diameter to feet
-    const pipeDiameterFeet = pipeDiameterInches / 12;
-
-    // Calculate cross-sectional area
-    const area = Math.PI * Math.pow(pipeDiameterFeet / 2, 2);
-
-    // Calculate flow velocity
-    const velocity = flowRateCFS / area;
-
-    // Calculate head loss due to pipe friction (using Darcy-Weisbach equation)
-    const frictionFactor = 0.02; // Assumed constant for turbulent flow
-    const headLossPipe = frictionFactor * (pipeLength / pipeDiameterFeet) * Math.pow(velocity, 2) / (2 * 32.2); // Convert g to ft/s²
-
-    // Calculate head loss due to fittings
-    const fittingLoss45 = fitting45 * 0.3 * Math.pow(velocity, 2) / (2 * 32.2);
-    const fittingLoss90 = fitting90 * 0.5 * Math.pow(velocity, 2) / (2 * 32.2);
-    const fittingLossTee = fittingTee * 0.4 * Math.pow(velocity, 2) / (2 * 32.2);
-    const fittingHeadLoss = fittingLoss45 + fittingLoss90 + fittingLossTee;
-
-    // Total pump head required
-    const totalPumpHead = totalLift + headLossPipe + fittingHeadLoss + miscHeadLoss;
-
-    // Pressure loss (psi)
-    const pressureLoss = totalPumpHead * 0.433; // Convert ft of water to psi (1 ft = 0.433 psi)
-
-    // Function to format number (rounding down using Math.floor)
-    function formatNumber(num) {
-        return Math.floor(num);
-    }
-
-    // Display results
-    document.getElementById('results').innerHTML = `
-        Flow Velocity: ${formatNumber(velocity)} ft/s<br>
-        Pipe Head Loss: ${formatNumber(headLossPipe)} feet<br>
-        Fitting Head Loss: ${formatNumber(fittingHeadLoss)} feet<br>
-        Vertical Lift: ${totalLift} feet<br>
-        Miscellaneous Head Loss: ${miscHeadLoss} feet<br>
-        Total Pump Head Required: ${formatNumber(totalPumpHead)} feet<br>
-        Pressure Loss: ${formatNumber(pressureLoss)} psi
-    `;
-
-    // Display the formatted result in the input field
-    document.getElementById("result").value = formatNumber(totalPumpHead);
-}
-
-// Form validation
-const form = document.getElementById('myForm');
-
-form.addEventListener('submit', (e) => {
-    const resultInput = document.getElementById('result').value;
-    if (isNaN(resultInput) || resultInput.trim() === '') {
-        e.preventDefault();
-        alert('Please enter a valid Head (distance)');
-    }
-});
-
-
-                    </script>
-                </div>
-            </div>
-
-
-
+            <button id="button" type="submit">Submit</button>
         </div>
-    </main>
 
+    </form>
 
+    <br>
+    <div id="calculator">
+        <div id="calc-part">
+            <h3>Pump Calculator</h3>
+            <label for="flowRate">Flow Rate (gpm):</label>
+            <input type="number" id="flowRate" required>
+            <label for="pipeLength">Total Pipe Length (feet):</label>
+            <input type="number" id="pipeLength" required>
+            <label for="pipeDiameter">Nominal Pipe Diameter (inches):</label>
+            <input type="number" id="pipeDiameter" required>
+            <label for="totalLift">Total Pumping Lift (feet):</label>
+            <input type="number" id="totalLift" required>
+            <label for="miscHeadLoss">Miscellaneous Head Loss (feet):</label>
+            <input type="number" id="miscHeadLoss" required>
+            <label for="fitting45">Number of 45° Elbows:</label>
+            <input type="number" id="fitting45" required value="0">
+            <label for="fitting90">Number of 90° Elbows:</label>
+            <input type="number" id="fitting90" required value="0">
+            <label for="fittingTee">Number of Tees:</label>
+            <input type="number" id="fittingTee" required value="0">
+            <button onclick="calculate()">Calculate</button>
+            <h2>Results</h2>
+            <div id="results"></div>
 
-   <!-- footer code is on views/includes/footer.ejs file -->
-   <%- include('includes/footer')%>
-   <!-- footer code is between this comments -->
+            <script>
+                function calculate() {
+                    const flowRateGPM = parseFloat(document.getElementById('flowRate').value);
+                    const pipeLength = parseFloat(document.getElementById('pipeLength').value);
+                    const pipeDiameterInches = parseFloat(document.getElementById('pipeDiameter').value);
+                    const totalLift = parseFloat(document.getElementById('totalLift').value);
+                    const miscHeadLoss = parseFloat(document.getElementById('miscHeadLoss').value);
+                    const fitting45 = parseInt(document.getElementById('fitting45').value);
+                    const fitting90 = parseInt(document.getElementById('fitting90').value);
+                    const fittingTee = parseInt(document.getElementById('fittingTee').value);
 
+                    const flowRateCFS = (flowRateGPM * 0.133681) / 60;
+                    const pipeDiameterFeet = pipeDiameterInches / 12;
+                    const area = Math.PI * Math.pow(pipeDiameterFeet / 2, 2);
+                    const velocity = flowRateCFS / area;
 
+                    const frictionFactor = 0.02;
+                    const headLossPipe = frictionFactor * (pipeLength / pipeDiameterFeet) * Math.pow(velocity, 2) / (2 * 32.2);
+                    const fittingLoss45 = fitting45 * 0.3 * Math.pow(velocity, 2) / (2 * 32.2);
+                    const fittingLoss90 = fitting90 * 0.5 * Math.pow(velocity, 2) / (2 * 32.2);
+                    const fittingLossTee = fittingTee * 0.4 * Math.pow(velocity, 2) / (2 * 32.2);
+                    const fittingHeadLoss = fittingLoss45 + fittingLoss90 + fittingLossTee;
 
+                    const totalPumpHead = totalLift + headLossPipe + fittingHeadLoss + miscHeadLoss;
+                    const pressureLoss = totalPumpHead * 0.433;
 
+                    function formatNumber(num) {
+                        return Math.floor(num);
+                    }
 
-
-    <div id="back-top">
-        <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+                    document.getElementById('results').innerHTML = `
+                        Total Pump Head Required: ${formatNumber(totalPumpHead)} feet<br>
+                        Pressure Loss: ${formatNumber(pressureLoss)} psi
+                    `;
+                }
+            </script>
+        </div>
     </div>
+</main>
+
+<%- include('includes/footer')%>
+
+<div id="back-top">
+    <a href="#"><i class="fa-solid fa-chevron-up" style="font-size: 15px; color: white;"></i></a>
+</div>
 
 </body>
 
