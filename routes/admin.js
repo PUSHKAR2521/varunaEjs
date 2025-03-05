@@ -9,6 +9,11 @@ const bcrypt = require('bcryptjs');
 // Secure Admin Panel (Only for Admins)
 router.get('/', authenticateUser, authorizeRole(['admin']), async (req, res) => {
     const products = await Product.find();
+    res.render('adminProductList', { products });
+});
+
+router.get('/add', authenticateUser, authorizeRole(['admin']), async (req, res) => {
+    const products = await Product.find();
     res.render('admin', { products });
 });
 
