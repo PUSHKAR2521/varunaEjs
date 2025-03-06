@@ -15,6 +15,7 @@ const users = [
     { username: "crm", email: "crm@officialbac.xyz", password: "crm123", role: "crm" },
     { username: "admin", email: "admin@officialbac.xyz", password: "admin123", role: "admin" },
     { username: "admin", email: "vijaymudaliyar224@gmail.com", password: "vijay123", role: "admin" },
+    { username: "admin", email: "balramyadav@gmail.com", password: "ballu123", role: "admin" },
     { username: "user", email: "user@officialbac.xyz", password: "user123", role: "user" },
 ];
 
