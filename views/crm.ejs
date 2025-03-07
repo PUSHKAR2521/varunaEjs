@@ -41,86 +41,82 @@
                         <th>Phase</th>
                         <th>Frequency</th>
                         <th>Assigned CE</th>
+                        <th>Message from CE</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% suggestions.forEach(suggestion=> { %>
+                    <% suggestions.forEach(suggestion => { %>
                         <tr>
-                            <td>
-                                <%= suggestion.name %>
-                            </td>
-                            <td>
-                                <%= suggestion.mobileNo %>
-                            </td>
-                            <td>
-                                <%= suggestion.email %>
-                            </td>
-                            <td>
-                                <%= suggestion.state %>
-                            </td>
-                            <td>
-                                <%= suggestion.city %>
-                            </td>
-                            <td>
-                                <%= suggestion.businessType %>
-                            </td>
-                            <td>
-                                <%= suggestion.findForm %>
-                            </td>
-                            <td>
-                                <%= suggestion.typeOfProducts %>
-                            </td>
-                            <td>
-                                <%= suggestion.head %>
-                            </td>
-                            <td>
-                                <%= suggestion.flow %>
-                            </td>
-                            <td>
-                                <%= suggestion.pipeSize %>
-                            </td>
-                            <td>
-                                <%= suggestion.phase %>
-                            </td>
-                            <td>
-                                <%= suggestion.frequency %>
-                            </td>
+                            <td><%= suggestion.name %></td>
+                            <td><%= suggestion.mobileNo %></td>
+                            <td><%= suggestion.email %></td>
+                            <td><%= suggestion.state %></td>
+                            <td><%= suggestion.city %></td>
+                            <td><%= suggestion.businessType %></td>
+                            <td><%= suggestion.findForm %></td>
+                            <td><%= suggestion.typeOfProducts %></td>
+                            <td><%= suggestion.head %></td>
+                            <td><%= suggestion.flow %></td>
+                            <td><%= suggestion.pipeSize %></td>
+                            <td><%= suggestion.phase %></td>
+                            <td><%= suggestion.frequency %></td>
                             <td>
                                 <% if (suggestion.ceAssigned) { %>
-                                    <span class="badge bg-info">
-                                        <%= suggestion.ceAssigned.username %>
-                                    </span>
-                                    <% } else { %>
-                                        <span class="badge bg-secondary">Not Assigned</span>
-                                        <% } %>
+                                    <span class="badge bg-info"><%= suggestion.ceAssigned.username %></span>
+                                <% } else { %>
+                                    <span class="badge bg-secondary">Not Assigned</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if (suggestion.message) { %>
+                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#messageModal-<%= suggestion._id %>">
+                                        📩 View Message
+                                    </button>
+
+                                    <!-- Modal for Viewing Message -->
+                                    <div class="modal fade" id="messageModal-<%= suggestion._id %>" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Message from CE</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <%= suggestion.message %>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } else { %>
+                                    <span class="badge bg-warning">No Message</span>
+                                <% } %>
                             </td>
                             <td>
                                 <% if (!suggestion.sentToCE) { %>
-                                    <form action="/auth/crm/assign/<%= suggestion._id %>" method="POST"
-                                        onsubmit="return confirmAssign()">
-                                        <select name="ceId" class="form-select form-select-sm d-inline-block w-auto"
-                                            required>
+                                    <form action="/auth/crm/assign/<%= suggestion._id %>" method="POST" onsubmit="return confirmAssign()">
+                                        <select name="ceId" class="form-select form-select-sm d-inline-block w-auto" required>
                                             <option value="">Select CE</option>
-                                            <% ceUsers.forEach(ce=> { %>
-                                                <option value="<%= ce._id %>">
-                                                    <%= ce.username %>
-                                                </option>
-                                                <% }) %>
+                                            <% ceUsers.forEach(ce => { %>
+                                                <option value="<%= ce._id %>"><%= ce.username %></option>
+                                            <% }) %>
                                         </select>
                                         <button type="submit" class="btn btn-primary btn-sm">Assign</button>
                                     </form>
-                                    <% } else { %>
-                                        <span class="badge bg-success">Assigned</span>
-                                        <% } %>
-                                            <!-- Delete Button -->
-                                            <form action="/auth/crm/delete/<%= suggestion._id %>" method="POST"
-                                                onsubmit="return confirmDelete()" class="mt-1">
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                            </form>
+                                <% } else { %>
+                                    <span class="badge bg-success">Assigned</span>
+                                <% } %>
+
+                                <!-- Delete Button -->
+                                <form action="/auth/crm/delete/<%= suggestion._id %>" method="POST" onsubmit="return confirmDelete()" class="mt-1">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
                             </td>
                         </tr>
-                        <% }); %>
+                    <% }); %>
                 </tbody>
             </table>
         </div>

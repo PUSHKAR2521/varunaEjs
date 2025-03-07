@@ -16,9 +16,10 @@ const SuggestionSchema = new mongoose.Schema({
     phase: String,
     frequency: String,
     createdAt: { type: Date, default: Date.now },
-    sentToCE: { type: Boolean, default: false }, // New field to track sending status
-    ceAssigned: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null }, // Link to CE user
-    completed: { type: Boolean, default: false } // Added field for tracking
+    sentToCE: { type: Boolean, default: false },
+    ceAssigned: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
+    completed: { type: Boolean, default: false },
+    message: { type: String, default: "" }  // ✅ New field for messages
 });
 
 module.exports = mongoose.model('Suggestion', SuggestionSchema);

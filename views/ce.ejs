@@ -10,8 +10,12 @@
         function confirmDelete() {
             return confirm("Are you sure you want to delete this suggestion?");
         }
+
+        function toggleMessageForm(id) {
+            const form = document.getElementById(`messageForm-${id}`);
+            form.classList.toggle("d-none");
+        }
     </script>
-    
 </head>
 
 <body>
@@ -23,6 +27,7 @@
             <h4>Manage Products</h4>
             <a href="/auth/logout" class="btn btn-danger">Logout</a>
         </div>
+
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
@@ -44,63 +49,91 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% suggestions.forEach(suggestion=> { %>
+                    <% suggestions.forEach(suggestion => { %>
                         <tr>
                             <td>
                                 <%= suggestion.name %>
+                                <br>
+                                <!-- Message Button Logic -->
+                                <% if (!suggestion.message) { %>
+                                    <button class="btn btn-primary btn-sm mt-2" onclick="toggleMessageForm('<%= suggestion._id %>')">
+                                        💬 Message
+                                    </button>
+
+                                    <!-- Hidden Message Form -->
+                                    <form id="messageForm-<%= suggestion._id %>" class="mt-2 d-none" action="/auth/ce/send-message/<%= suggestion._id %>" method="POST">
+                                        <textarea name="message" class="form-control mb-2" rows="2" required></textarea>
+                                        <button type="submit" class="btn btn-success btn-sm">Send</button>
+                                    </form>
+                                <% } else { %>
+                                    <!-- View Message Button (Opens Modal) -->
+                                    <button class="btn btn-info btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#messageModal-<%= suggestion._id %>">
+                                        📩 View Message
+                                    </button>
+
+                                    <!-- Edit Message Button -->
+                                    <button class="btn btn-warning btn-sm mt-2" onclick="toggleMessageForm('<%= suggestion._id %>')">
+                                        ✏️ Edit
+                                    </button>
+
+                                    <!-- Delete Message Button -->
+                                    <form action="/auth/ce/delete-message/<%= suggestion._id %>" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm mt-2" onclick="return confirm('Delete this message?')">
+                                            🗑 Delete
+                                        </button>
+                                    </form>
+
+                                    <!-- Bootstrap Modal for Viewing Message -->
+                                    <div class="modal fade" id="messageModal-<%= suggestion._id %>" tabindex="-1" aria-labelledby="messageModalLabel-<%= suggestion._id %>" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="messageModalLabel-<%= suggestion._id %>">Message from CE</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <%= suggestion.message %>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Edit Message Form (Hidden by Default) -->
+                                    <form id="messageForm-<%= suggestion._id %>" class="mt-2 d-none" action="/auth/ce/edit-message/<%= suggestion._id %>" method="POST">
+                                        <textarea name="message" class="form-control mb-2" rows="2" required><%= suggestion.message %></textarea>
+                                        <button type="submit" class="btn btn-success btn-sm">Update</button>
+                                    </form>
+                                <% } %>
                             </td>
-                            <td>
-                                <%= suggestion.mobileNo %>
-                            </td>
-                            <td>
-                                <%= suggestion.email %>
-                            </td>
-                            <td>
-                                <%= suggestion.state %>
-                            </td>
-                            <td>
-                                <%= suggestion.city %>
-                            </td>
-                            <td>
-                                <%= suggestion.businessType %>
-                            </td>
-                            <td>
-                                <%= suggestion.findForm %>
-                            </td>
-                            <td>
-                                <%= suggestion.typeOfProducts %>
-                            </td>
-                            <td>
-                                <%= suggestion.head %>
-                            </td>
-                            <td>
-                                <%= suggestion.flow %>
-                            </td>
-                            <td>
-                                <%= suggestion.pipeSize %>
-                            </td>
-                            <td>
-                                <%= suggestion.phase %>
-                            </td>
-                            <td>
-                                <%= suggestion.frequency %>
-                            </td>
+                            <td><%= suggestion.mobileNo %></td>
+                            <td><%= suggestion.email %></td>
+                            <td><%= suggestion.state %></td>
+                            <td><%= suggestion.city %></td>
+                            <td><%= suggestion.businessType %></td>
+                            <td><%= suggestion.findForm %></td>
+                            <td><%= suggestion.typeOfProducts %></td>
+                            <td><%= suggestion.head %></td>
+                            <td><%= suggestion.flow %></td>
+                            <td><%= suggestion.pipeSize %></td>
+                            <td><%= suggestion.phase %></td>
+                            <td><%= suggestion.frequency %></td>
                             <td>
                                 <form action="/auth/ce/update-status/<%= suggestion._id %>" method="POST">
                                     <input type="hidden" name="completed" value="<%= !suggestion.completed %>">
-                                    <button type="submit"
-                                        class="btn <%= suggestion.completed ? 'btn-danger' : 'btn-success' %>">
+                                    <button type="submit" class="btn <%= suggestion.completed ? 'btn-danger' : 'btn-success' %>">
                                         <%= suggestion.completed ? "Done" : "Not Done" %>
                                     </button>
                                 </form>
                                 <!-- Delete Button -->
-                                <form action="/auth/ce/delete/<%= suggestion._id %>" method="POST"
-                                    onsubmit="return confirmDelete()" class="mt-1">
+                                <form action="/auth/ce/delete/<%= suggestion._id %>" method="POST" onsubmit="return confirmDelete()" class="mt-1">
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </td>
                         </tr>
-                        <% }); %>
+                    <% }); %>
                 </tbody>
             </table>
         </div>
