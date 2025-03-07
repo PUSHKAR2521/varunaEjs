@@ -148,14 +148,22 @@
                         <% }); %>
                 </select>
 
-                <!-- <label for="head">Head (meters):</label> -->
+                <!-- Modified head input with hidden field for original name -->
                 <div style="display: flex; align-items: center;">
-                    <input type="text" id="head" name="Head" placeholder="Min - Max (Head)" required
-                        style="width: 200px;">
-                        <a href="#calcNavigation" style="text-decoration: none;"><span id="calcNavigation">?</span></a>
+                    <div style="display: flex; width: 200px;">
+                        <input type="text" id="headMin" placeholder="Min (Head)" required style="width: 100px; margin-right: 5px;">
+                        <input type="text" id="headMax" placeholder="Max (Head)" required style="width: 100px;">
+                    </div>
+                    <input type="hidden" id="head" name="Head" required>
+                    <a href="#calcNavigation" style="text-decoration: none;"><span id="calcNavigation">?</span></a>
                 </div>
-                <!-- <label for="flow">Flow (LPM):</label> -->
-                <input type="text" id="flow" name="Flow" placeholder="Min - Max (Flow)" required style="width: 200px;">
+
+                <!-- Modified flow input with hidden field for original name -->
+                <div style="display: flex; width: 200px;">
+                    <input type="text" id="flowMin" placeholder="Min (Flow)" required style="width: 100px; margin-right: 5px;">
+                    <input type="text" id="flowMax" placeholder="Max (Flow)" required style="width: 100px;">
+                </div>
+                <input type="hidden" id="flow" name="Flow" required>
 
                 <script>
                     document.getElementById("typeOfProducts").addEventListener("change", function () {
@@ -168,12 +176,32 @@
                                     if (data.error) {
                                         alert(data.error);
                                     } else {
-                                        document.getElementById("head").placeholder = `${data.head.min} - ${data.head.max} (head) `;
-                                        document.getElementById("flow").placeholder = `${data.flow.min} - ${data.flow.max} (flow)`;
+                                        document.getElementById("headMin").placeholder = `${data.head.min} (min)`;
+                                        document.getElementById("headMax").placeholder = `${data.head.max} (max)`;
+                                        document.getElementById("flowMin").placeholder = `${data.flow.min} (min)`;
+                                        document.getElementById("flowMax").placeholder = `${data.flow.max} (max)`;
                                     }
                                 })
                                 .catch(error => console.error("Error fetching product details:", error));
                         }
+                    });
+
+                    // Add form submit handler to combine min and max values
+                    document.getElementById("myForm").addEventListener("submit", function(e) {
+                        const headMin = document.getElementById("headMin").value;
+                        const headMax = document.getElementById("headMax").value;
+                        const flowMin = document.getElementById("flowMin").value;
+                        const flowMax = document.getElementById("flowMax").value;
+                        
+                        if (!headMin || !headMax || !flowMin || !flowMax) {
+                            e.preventDefault();
+                            alert("Please add Min and Max Both Values");
+                            return;
+                        }
+                        
+                        // Combine values in the format the server expects
+                        document.getElementById("head").value = headMin + " - " + headMax;
+                        document.getElementById("flow").value = flowMin + " - " + flowMax;
                     });
                 </script>
 
@@ -263,6 +291,8 @@
                         Total Pump Head Required: ${formatNumber(totalPumpHead)} feet<br>
                         Pressure Loss: ${formatNumber(pressureLoss)} psi
                     `;
+                    document.getElementById("headMax").value = formatNumber(totalPumpHead);
+
                         }
                     </script>
                 </div>
