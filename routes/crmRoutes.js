@@ -10,14 +10,13 @@ router.get('/', authenticateUser, authorizeRole('crm'), async (req, res) => {
         const suggestions = await Suggestion.find().populate('ceAssigned'); // Fetch assigned CE info
         const ceUsers = await User.find({ role: 'ce' }); // Fetch all CE users
 
-        res.render('crm', { suggestions, ceUsers }); // Pass ceUsers to EJS
+        res.render('crm', { suggestions, ceUsers }); // Pass data to CRM view
     } catch (error) {
         console.error('Error fetching suggestions or CE users:', error);
         res.status(500).send('Server Error');
     }
 });
 
- 
 // Assign Suggestion to Specific CE
 router.post('/assign/:id', authenticateUser, authorizeRole('crm'), async (req, res) => {
     try {
@@ -38,6 +37,21 @@ router.post('/delete/:id', authenticateUser, authorizeRole('crm'), async (req, r
         res.redirect('/auth/crm'); // Refresh CRM page after deletion
     } catch (error) {
         console.error('Error deleting suggestion:', error);
+        res.status(500).send('Server Error');
+    }
+});
+
+// ✅ NEW: Fetch messages from CE
+router.get('/messages/:id', authenticateUser, authorizeRole('crm'), async (req, res) => {
+    try {
+        const suggestion = await Suggestion.findById(req.params.id).populate('ceAssigned');
+        if (!suggestion) {
+            return res.status(404).send('Suggestion not found');
+        }
+
+        res.json({ message: suggestion.message, ceName: suggestion.ceAssigned?.username || "Unknown CE" });
+    } catch (error) {
+        console.error('Error fetching message:', error);
         res.status(500).send('Server Error');
     }
 });

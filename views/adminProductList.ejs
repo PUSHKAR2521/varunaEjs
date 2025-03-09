@@ -1,84 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Product List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* Limit width and enable ellipsis */
+        .truncate {
+            max-width: 150px; /* Adjust width as needed */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+
+    <script>
+        function filterTable() {
+            const filterType = document.getElementById("filterType").value;
+            const filterValue = document.getElementById("filterInput").value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                const cellValue = row.querySelector(`td[data-filter='${filterType}']`)?.textContent.toLowerCase() || "";
+                row.style.display = cellValue.includes(filterValue) ? "" : "none";
+            });
+        }
+    </script>
 </head>
 
-<!-- Product List Table -->
-<div class="card">
-    <div class="d-flex justify-content-between mb-3">
-        <h4>Products List</h4>
-        <div class="d-fle">
+<body>
 
-            <a href="/admin/add" class="btn btn-success">Add Product</a>
-            <a href="/auth/logout" class="btn btn-danger">Logout</a>
+    <div class="container mt-4">
+        <h1 class="text-center fw-bold mb-4">Admin Product List</h1>
+
+        <div class="d-flex justify-content-between mb-3">
+            <h4>Products List</h4>
+            <div class="d-flex">
+                <a href="/admin/add" class="btn btn-success me-2">Add Product</a>
+                <a href="/auth/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+
+        <!-- 🔹 Filter Section -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <select id="filterType" class="form-select">
+                    <option value="model">Model</option>
+                    <option value="motor_rating">Motor Rating</option>
+                    <option value="stages">Stages</option>
+                    <option value="head_meters">Head Meters</option>
+                    <option value="discharge_lpm">Discharge LPM</option>
+                    <option value="description">Description</option>
+                    <option value="input">Input</option>
+                    <option value="salient_features">Features</option>
+                    <option value="applications">Applications</option>
+                    <option value="material">Material</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="filterInput" class="form-control" placeholder="Enter value to filter" onkeyup="filterTable()">
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <% if (products.length === 0) { %>
+                    <p class="text-center text-muted">No products available.</p>
+                <% } else { %>
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Model</th>
+                                <th>Motor Rating</th>
+                                <th>Stages</th>
+                                <th>Head Meters</th>
+                                <th>Discharge LPM</th>
+                                <th>Description</th>
+                                <th>Input</th>
+                                <th>Features</th>
+                                <th>Applications</th>
+                                <th>Material</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% products.forEach((product, index) => { %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td data-filter="model"><strong><%= product.model || "N/A" %></strong></td>
+                                    <td data-filter="motor_rating"><%= product.motor_rating || "N/A" %></td>
+                                    <td data-filter="stages"><%= product.stages || "N/A" %></td>
+                                    <td data-filter="head_meters"><%= product.head_meters ? product.head_meters.join(", ") : "N/A" %></td>
+                                    <td data-filter="discharge_lpm"><%= product.discharge_lpm ? product.discharge_lpm.join(", ") : "N/A" %></td>
+                                    
+                                    <!-- 🔹 Truncated Description -->
+                                    <td class="truncate" data-filter="description" title="<%= product.description %>">
+                                        <%= product.description || "N/A" %>
+                                    </td>
+
+                                    <td data-filter="input"><%= product.input || "N/A" %></td>
+
+                                    <!-- 🔹 Truncated Features -->
+                                    <td class="truncate" data-filter="salient_features" title="<%= product.salient_features ? product.salient_features.join(', ') : 'N/A' %>">
+                                        <%= product.salient_features ? product.salient_features.join(", ") : "N/A" %>
+                                    </td>
+
+                                    <td data-filter="applications"><%= product.applications ? product.applications.join(", ") : "N/A" %></td>
+                                    <td data-filter="material"><%= product.material || "N/A" %></td>
+                                    <td>
+                                        <a href="/admin/edit/<%= product._id %>" class="btn btn-sm btn-warning">Edit</a>
+                                        <a href="/admin/delete/<%= product._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                <% } %>
+            </div>
         </div>
     </div>
-    <div class="card-body">
-        <% if (products.length===0) { %>
-            <p class="text-center text-muted">No products available.</p>
-            <% } else { %>
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>#</th>
-                            <th>Model</th>
-                            <th>Motor Rating</th>
-                            <th>Stages</th>
-                            <th>Head Meters</th>
-                            <th>Discharge LPM</th>
-                            <th>Description</th>
-                            <th>Input</th>
-                            <th>Features</th>
-                            <th>Applications</th>
-                            <th>Material</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% products.forEach((product, index)=> { %>
-                            <tr>
-                                <td>
-                                    <%= index + 1 %>
-                                </td>
-                                <td><strong>
-                                        <%= product.model || "N/A" %>
-                                    </strong></td>
-                                <td>
-                                    <%= product.motor_rating || "N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.stages || "N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.head_meters ? product.head_meters.join(", ") : " N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.discharge_lpm ? product.discharge_lpm.join(", ") : " N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.description || "N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.input || "N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.salient_features ? product.salient_features.join(", ") : " N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.applications ? product.applications.join(", ") : " N/A" %>
-                                </td>
-                                <td>
-                                    <%= product.material || "N/A" %>
-                                </td>
-                                <td>
-                                    <a href="/admin/edit/<%= product._id %>" class="btn btn-sm btn-warning">Edit</a>
-                                    <a href="/admin/delete/<%= product._id %>" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure?')">Delete</a>
-                                </td>
-                            </tr>
-                            <% }); %>
-                    </tbody>
-                </table>
-                <% } %>
-    </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

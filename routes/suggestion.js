@@ -188,14 +188,14 @@ router.post('/suggestionForm', async (req, res) => {
         // }
 
         if (matchingProducts.length === 0) {
-            return res.render('suggestionResults', { products: [], message: "No product available within the given range." });
+            return res.render('suggestionResults', { products: [], message: "No product available within the given range. considerly Contact to company" });
         }
 
         res.render('suggestionResults', { products: matchingProducts, message: "" });
 
     } catch (error) {
         console.error("Error in /suggestionForm route:", error);
-        res.status(500).send("Please add Min and Max Both Values");
+        res.status(500).send("Please add Min and Max Both Values " );
     }
 });
 

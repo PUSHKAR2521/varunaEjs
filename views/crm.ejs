@@ -10,6 +10,21 @@
         function confirmDelete() {
             return confirm("Are you sure you want to delete this suggestion?");
         }
+
+        function confirmAssign() {
+            return confirm("Are you sure you want to assign this suggestion to a CE?");
+        }
+
+        function filterTable() {
+            const filterType = document.getElementById("filterType").value;
+            const filterValue = document.getElementById("filterInput").value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                const cellValue = row.querySelector(`td[data-filter='${filterType}']`)?.textContent.toLowerCase() || "";
+                row.style.display = cellValue.includes(filterValue) ? "" : "none";
+            });
+        }
     </script>
 </head>
 
@@ -21,6 +36,31 @@
         <div class="d-flex justify-content-between mb-3">
             <h4>Manage Products</h4>
             <a href="/auth/logout" class="btn btn-danger">Logout</a>
+        </div>
+
+        <!-- 🔹 Filter Section -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <select id="filterType" class="form-select">
+                    <option value="name">Name</option>
+                    <option value="mobileNo">Mobile No</option>
+                    <option value="email">Email</option>
+                    <option value="state">State</option>
+                    <option value="city">City</option>
+                    <option value="businessType">Business Type</option>
+                    <option value="findForm">Find Form</option>
+                    <option value="typeOfProducts">Type of Products</option>
+                    <option value="head">Head</option>
+                    <option value="flow">Flow</option>
+                    <option value="pipeSize">Pipe Size</option>
+                    <option value="phase">Phase</option>
+                    <option value="frequency">Frequency</option>
+                    <option value="ceAssigned">Assigned CE</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="filterInput" class="form-control" placeholder="Enter value to filter" onkeyup="filterTable()">
+            </div>
         </div>
 
         <div class="table-responsive">
@@ -41,97 +81,88 @@
                         <th>Phase</th>
                         <th>Frequency</th>
                         <th>Assigned CE</th>
+                        <th>Message from CE</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% suggestions.forEach(suggestion=> { %>
+                    <% suggestions.forEach(suggestion => { %>
                         <tr>
-                            <td>
-                                <%= suggestion.name %>
-                            </td>
-                            <td>
-                                <%= suggestion.mobileNo %>
-                            </td>
-                            <td>
-                                <%= suggestion.email %>
-                            </td>
-                            <td>
-                                <%= suggestion.state %>
-                            </td>
-                            <td>
-                                <%= suggestion.city %>
-                            </td>
-                            <td>
-                                <%= suggestion.businessType %>
-                            </td>
-                            <td>
-                                <%= suggestion.findForm %>
-                            </td>
-                            <td>
-                                <%= suggestion.typeOfProducts %>
-                            </td>
-                            <td>
-                                <%= suggestion.head %>
-                            </td>
-                            <td>
-                                <%= suggestion.flow %>
-                            </td>
-                            <td>
-                                <%= suggestion.pipeSize %>
-                            </td>
-                            <td>
-                                <%= suggestion.phase %>
-                            </td>
-                            <td>
-                                <%= suggestion.frequency %>
-                            </td>
-                            <td>
+                            <td data-filter="name"><%= suggestion.name %></td>
+                            <td data-filter="mobileNo"><%= suggestion.mobileNo %></td>
+                            <td data-filter="email"><%= suggestion.email %></td>
+                            <td data-filter="state"><%= suggestion.state %></td>
+                            <td data-filter="city"><%= suggestion.city %></td>
+                            <td data-filter="businessType"><%= suggestion.businessType %></td>
+                            <td data-filter="findForm"><%= suggestion.findForm %></td>
+                            <td data-filter="typeOfProducts"><%= suggestion.typeOfProducts %></td>
+                            <td data-filter="head"><%= suggestion.head %></td>
+                            <td data-filter="flow"><%= suggestion.flow %></td>
+                            <td data-filter="pipeSize"><%= suggestion.pipeSize %></td>
+                            <td data-filter="phase"><%= suggestion.phase %></td>
+                            <td data-filter="frequency"><%= suggestion.frequency %></td>
+                            <td data-filter="ceAssigned">
                                 <% if (suggestion.ceAssigned) { %>
-                                    <span class="badge bg-info">
-                                        <%= suggestion.ceAssigned.username %>
-                                    </span>
-                                    <% } else { %>
-                                        <span class="badge bg-secondary">Not Assigned</span>
-                                        <% } %>
+                                    <span class="badge bg-info"><%= suggestion.ceAssigned.username %></span>
+                                <% } else { %>
+                                    <span class="badge bg-secondary">Not Assigned</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if (suggestion.message) { %>
+                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#messageModal-<%= suggestion._id %>">
+                                        📩 View Message
+                                    </button>
+
+                                    <!-- Modal for Viewing Message -->
+                                    <div class="modal fade" id="messageModal-<%= suggestion._id %>" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Message from CE</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <%= suggestion.message %>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } else { %>
+                                    <span class="badge bg-warning">No Message</span>
+                                <% } %>
                             </td>
                             <td>
                                 <% if (!suggestion.sentToCE) { %>
-                                    <form action="/auth/crm/assign/<%= suggestion._id %>" method="POST"
-                                        onsubmit="return confirmAssign()">
-                                        <select name="ceId" class="form-select form-select-sm d-inline-block w-auto"
-                                            required>
+                                    <form action="/auth/crm/assign/<%= suggestion._id %>" method="POST" onsubmit="return confirmAssign()">
+                                        <select name="ceId" class="form-select form-select-sm d-inline-block w-auto" required>
                                             <option value="">Select CE</option>
-                                            <% ceUsers.forEach(ce=> { %>
-                                                <option value="<%= ce._id %>">
-                                                    <%= ce.username %>
-                                                </option>
-                                                <% }) %>
+                                            <% ceUsers.forEach(ce => { %>
+                                                <option value="<%= ce._id %>"><%= ce.username %></option>
+                                            <% }) %>
                                         </select>
                                         <button type="submit" class="btn btn-primary btn-sm">Assign</button>
                                     </form>
-                                    <% } else { %>
-                                        <span class="badge bg-success">Assigned</span>
-                                        <% } %>
-                                            <!-- Delete Button -->
-                                            <form action="/auth/crm/delete/<%= suggestion._id %>" method="POST"
-                                                onsubmit="return confirmDelete()" class="mt-1">
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                            </form>
+                                <% } else { %>
+                                    <span class="badge bg-success">Assigned</span>
+                                <% } %>
+
+                                <!-- Delete Button -->
+                                <form action="/auth/crm/delete/<%= suggestion._id %>" method="POST" onsubmit="return confirmDelete()" class="mt-1">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
                             </td>
                         </tr>
-                        <% }); %>
+                    <% }); %>
                 </tbody>
             </table>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function confirmAssign() {
-            return confirm("Are you sure you want to assign this suggestion to a CE?");
-        }
-    </script>
 
 </body>
 
